@@ -31,7 +31,7 @@
 }
 :root{--band-text:#f4f1ea;--band-soft:rgba(244,241,234,.74);--radius:16px;
   /* hero car focal point — lower = show more bottom. 50% 100% = very bottom, 50% 50% = centre */
-  --hero-focus:50% 78%}
+  --hero-focus:50% 52%}
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -83,11 +83,11 @@ body.zh .btn,body.zh .lang button,body.zh .brand{font-family:'Noto Sans SC',sans
 .nav .mobile{display:none}
 
 /* ===== HERO ===== */
-.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:#0b0b0d;isolation:isolate}
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:#08080a;isolation:isolate}
 
-/* background car — sharp, stable, anchored to show the lower body */
+/* background car — sharp, stable, centred */
 .hero-car{position:absolute;inset:0;z-index:0;overflow:hidden}
-.hero-car img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--hero-focus);filter:brightness(.88) contrast(1.05) saturate(1.06)}
+.hero-car img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--hero-focus);filter:brightness(.9) contrast(1.04) saturate(1.03)}
 
 /* giant watermark word — stacked, embossed outline */
 .hero-mega{position:absolute;top:10%;left:0;right:0;z-index:1;text-align:center;pointer-events:none;padding:0 4vw}
@@ -95,16 +95,16 @@ body.zh .btn,body.zh .lang button,body.zh .brand{font-family:'Noto Sans SC',sans
   color:rgba(244,241,234,.07);-webkit-text-stroke:1.4px rgba(244,241,234,.3)}
 body.zh .hero-mega span{font-family:'Noto Sans SC';letter-spacing:.04em;line-height:.94}
 
-/* legibility veils — light through the car, dark only behind the text */
+/* legibility veils — keep the car bright, darken only where UI sits */
 .hero-veil{position:absolute;inset:0;z-index:2;pointer-events:none;
   background:
-   radial-gradient(130% 92% at 50% 26%,transparent 44%,rgba(11,11,13,.4) 100%),
-   linear-gradient(180deg,rgba(11,11,13,.45) 0%,rgba(11,11,13,.05) 26%,rgba(11,11,13,.05) 46%,rgba(11,11,13,.45) 65%,rgba(11,11,13,.88) 85%,var(--bg) 100%)}
+   linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.14) 15%,transparent 38%,transparent 56%,rgba(8,8,11,.55) 77%,rgba(8,8,11,.92) 90%,var(--bg) 100%),
+   linear-gradient(90deg,rgba(8,8,11,.62) 0%,rgba(8,8,11,.3) 30%,transparent 56%)}
 
 /* content — single aligned column */
 .hero-content{position:relative;z-index:3;width:100%;padding:9rem 0 clamp(4rem,9vh,6rem)}
 .hero-inner{max-width:48rem}
-.hero h1{font-size:clamp(2.5rem,6.2vw,4.6rem);font-weight:800;color:#f7f3ea;margin:1.1rem 0 0;text-shadow:0 2px 26px rgba(0,0,0,.45)}
+.hero h1{font-size:clamp(2.5rem,6.2vw,4.6rem);font-weight:800;color:#f7f3ea;margin:1.1rem 0 0;text-shadow:0 1px 2px rgba(0,0,0,.55),0 2px 30px rgba(0,0,0,.5)}
 .hero h1 .gold{color:var(--gold)}
 .hero p.lead{font-size:clamp(1rem,1.25vw,1.12rem);line-height:1.6;color:rgba(244,241,234,.82);max-width:34rem;margin:1.3rem 0 0}
 .hero-cta{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem}
@@ -302,7 +302,7 @@ body.zh .foot-col h4{font-family:'Noto Sans SC';letter-spacing:.05em}
 <main id="top">
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-car"><img src="car-mercedes-s.jpg" alt="Black Mercedes-Benz S-Class — premium export vehicle"></div>
+  <div class="hero-car"><img src="694428.jpg" alt="White McLaren 675LT — premium export supercar, front view"></div>
   <div class="hero-mega" aria-hidden="true">
     <span class="en-only">LUXURY<br>VALUE</span>
     <span class="zh-only">豪车<br>好价</span>
