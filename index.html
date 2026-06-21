@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Cheap Cars Export — premium vehicle export from Guangzhou, China. New & used cars, SUVs, MPVs and EVs sourced, inspected and shipped worldwide to Ghana, Africa and beyond.">
+<title>Cheap Cars Export — Drive the Legacy of Value · Guangzhou</title>
+<link rel="icon" href="logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== THEME TOKENS ===== */
+:root[data-theme="dark"]{
+  --bg:#0b0b0d; --bg-2:#0f0f12; --surface:#16161a; --surface-2:#1d1d22;
+  --text:#f4f1ea; --text-soft:#a6a39c;
+  --gold:#d9b46a; --gold-soft:#ecd29a; --gold-deep:#b8924a;
+  --border:rgba(244,241,234,.10); --on-gold:#1a1408;
+  --shadow:0 30px 70px -30px rgba(0,0,0,.85);
+  --glass:rgba(18,18,21,.55); --glass-border:rgba(244,241,234,.16);
+  --nav-bg:rgba(11,11,13,.78); --chip-bg:rgba(15,15,18,.9);
+}
+:root[data-theme="light"]{
+  --bg:#f3efe6; --bg-2:#ece7da; --surface:#ffffff; --surface-2:#f1ece0;
+  --text:#161412; --text-soft:#6b6760;
+  --gold:#b8924a; --gold-soft:#caa766; --gold-deep:#9a7838;
+  --border:rgba(22,20,18,.12); --on-gold:#1a1408;
+  --shadow:0 30px 70px -30px rgba(120,95,40,.4);
+  --glass:rgba(255,255,255,.6); --glass-border:rgba(22,20,18,.14);
+  --nav-bg:rgba(243,239,230,.86); --chip-bg:rgba(255,255,255,.92);
+}
+:root{--band-text:#f4f1ea;--band-soft:rgba(244,241,234,.74);--radius:16px}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;overflow-x:hidden;transition:background .4s,color .4s}
+body.zh{font-family:'Noto Sans SC','Inter',sans-serif}
+h1,h2,h3,.display{font-family:'Sora',sans-serif;line-height:1.06;letter-spacing:-.02em}
+body.zh h1,body.zh h2,body.zh h3{font-family:'Noto Sans SC',sans-serif;letter-spacing:0}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{width:min(1200px,92vw);margin-inline:auto}
+.eyebrow{font-family:'Sora';font-weight:700;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:.6rem}
+body.zh .eyebrow{letter-spacing:.12em;font-family:'Noto Sans SC'}
+.eyebrow.center{justify-content:center}
+
+.zh-only{display:none}
+body.zh .en-only{display:none}
+body.zh .zh-only{display:inline}
+body.zh .zh-only.block-el{display:block}
+
+/* NAV */
+header{position:fixed;top:0;left:0;right:0;z-index:50;transition:.35s}
+header.scrolled{background:var(--nav-bg);backdrop-filter:blur(16px);box-shadow:0 1px 0 var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:1.05rem 0;gap:1rem}
+.brand{display:flex;align-items:center;gap:.6rem;font-family:'Sora';font-weight:800;font-size:1.1rem;letter-spacing:.01em}
+.brand .logo{width:34px;height:34px;border-radius:9px;object-fit:cover;box-shadow:0 8px 18px -8px var(--gold)}
+.brand b{color:var(--gold)}
+.nav-links{display:flex;gap:1.9rem;font-weight:500;font-size:.92rem}
+.nav-links a{position:relative;color:var(--text-soft);transition:.2s}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1.5px;background:var(--gold);transition:.25s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:.7rem}
+.lang{display:inline-flex;border:1px solid var(--border);border-radius:999px;overflow:hidden;font-family:'Sora';font-weight:700;font-size:.76rem;background:var(--surface)}
+.lang button{border:0;background:transparent;padding:.4rem .75rem;cursor:pointer;color:var(--text-soft);transition:.2s;font-family:inherit}
+.lang button.active{background:var(--gold);color:var(--on-gold)}
+.theme-toggle{width:37px;height:37px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:1rem;display:grid;place-items:center;transition:.25s}
+.theme-toggle:hover{border-color:var(--gold);color:var(--gold)}
+.theme-toggle .sun{display:none}
+:root[data-theme="light"] .theme-toggle .sun{display:block}
+:root[data-theme="light"] .theme-toggle .moon{display:none}
+.btn{display:inline-flex;align-items:center;gap:.5rem;font-family:'Sora';font-weight:600;padding:.8rem 1.5rem;border-radius:999px;font-size:.9rem;transition:.25s;border:0;cursor:pointer}
+body.zh .btn,body.zh .lang button,body.zh .brand{font-family:'Noto Sans SC',sans-serif}
+.btn-gold{background:var(--gold);color:var(--on-gold);box-shadow:0 16px 34px -16px var(--gold)}
+.btn-gold:hover{background:var(--gold-soft);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--text);border:1.4px solid var(--gold)}
+.btn-outline:hover{background:var(--gold);color:var(--on-gold);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--text);border:1.4px solid var(--border)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.nav .mobile{display:none}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:3rem;overflow:hidden;background:var(--bg)}
+.hero-stage{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-stage::after{content:"";position:absolute;inset:0;z-index:2;background:
+  linear-gradient(180deg,rgba(11,11,13,.5) 0%,rgba(11,11,13,.15) 28%,rgba(11,11,13,.3) 55%,rgba(11,11,13,.86) 90%,var(--bg) 100%)}
+.hero-mega{position:absolute;top:15%;left:0;right:0;text-align:center;z-index:3;pointer-events:none;padding:0 2vw}
+.hero-mega::before{content:"";position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);width:88%;height:150%;z-index:-1;background:radial-gradient(60% 60% at 50% 50%,rgba(11,11,13,.6),transparent 72%);filter:blur(10px)}
+.hero-mega span{font-family:'Sora';font-weight:800;font-size:clamp(2.6rem,10.5vw,9rem);letter-spacing:.02em;line-height:.92;white-space:nowrap;color:#f7f3ea;
+  text-shadow:0 2px 4px rgba(0,0,0,.75),0 6px 16px rgba(0,0,0,.85),0 14px 34px rgba(0,0,0,.8),0 0 70px rgba(217,180,106,.32);
+  -webkit-text-stroke:1.5px rgba(0,0,0,.32)}
+.hero-car{position:absolute;inset:0;z-index:1;overflow:hidden}
+.hero-car img{position:absolute;top:-8%;left:-5%;width:110%;height:116%;object-fit:cover;object-position:50% 42%;filter:blur(3px) brightness(.74) contrast(1.05)}
+.hero-content{position:relative;z-index:3;margin-top:auto}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:end}
+.hero h1{font-size:clamp(2.2rem,4.4vw,3.4rem);font-weight:800;margin:.4rem 0 0}
+.hero h1 .gold{color:var(--gold)}
+.hero .lead-wrap{padding-bottom:.4rem}
+.hero p.lead{font-size:1rem;color:var(--text-soft);max-width:30rem;margin-bottom:1.3rem}
+.hero-cta{display:flex;gap:.8rem;flex-wrap:wrap}
+.hero-tags{display:flex;gap:1.3rem;margin-top:1.6rem;flex-wrap:wrap;font-weight:500;font-size:.84rem;color:var(--text-soft)}
+.hero-tags span.tag{display:flex;align-items:center;gap:.45rem}
+.hero-tags span.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold)}
+
+/* SECTION SHELL */
+section.block{padding:6rem 0}
+.head{max-width:46rem;margin:0 auto 3rem;text-align:center}
+.head.left{margin-inline:0;text-align:left}
+.head h2{font-size:clamp(1.9rem,4vw,2.9rem);font-weight:800;margin:.7rem 0}
+.head p{color:var(--text-soft);font-size:1.02rem}
+
+.reveal{opacity:0;transform:translateY(36px);transition:.8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal[data-d="1"]{transition-delay:.1s}.reveal[data-d="2"]{transition-delay:.2s}.reveal[data-d="3"]{transition-delay:.3s}
+
+/* COLLECTIONS / CAROUSEL */
+.carousel{position:relative}
+.track{display:flex;gap:1.4rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:.5rem .2rem 1.5rem;scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.ccard{scroll-snap-align:center;flex:0 0 clamp(260px,30vw,340px);background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:.35s}
+.ccard:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:var(--gold)}
+.ccard .ph{position:relative;height:210px;overflow:hidden}
+.ccard .ph img{width:100%;height:100%;object-fit:cover;transition:.6s}
+.ccard:hover .ph img{transform:scale(1.08)}
+.ccard .tags{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;gap:.4rem}
+.ccard .tag{background:var(--chip-bg);backdrop-filter:blur(6px);color:var(--text);font-size:.68rem;font-weight:600;padding:.3rem .6rem;border-radius:999px;border:1px solid var(--border)}
+.ccard .body{padding:1.1rem 1.2rem 1.3rem}
+.ccard .yr{font-size:.72rem;color:var(--gold);font-weight:700;letter-spacing:.06em}
+.ccard h3{font-size:1.12rem;margin:.2rem 0 .7rem}
+.ccard .row{display:flex;align-items:center;justify-content:space-between}
+.ccard .price{font-family:'Sora';font-weight:700;font-size:.95rem;color:var(--text)}
+.ccard .go{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;color:var(--gold);transition:.25s}
+.ccard .go:hover{background:var(--gold);color:var(--on-gold)}
+.car-nav{display:flex;justify-content:center;gap:.8rem;margin-top:.5rem}
+.car-nav button{width:46px;height:46px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:1.1rem;transition:.25s}
+.car-nav button:hover{border-color:var(--gold);color:var(--gold)}
+.view-all{display:flex;justify-content:center;margin-top:1.8rem}
+
+/* VIDEO */
+.video-sec{position:relative;overflow:hidden;background:var(--bg-2)}
+.video-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:3rem;align-items:center}
+.video-sec h2{font-size:clamp(1.8rem,3.6vw,2.6rem);font-weight:800;margin:.7rem 0}
+.video-sec p{color:var(--text-soft);max-width:30rem}
+.vpoints{list-style:none;margin-top:1.4rem;display:flex;flex-direction:column;gap:.7rem}
+.vpoints li{display:flex;align-items:center;gap:.7rem;font-weight:500}
+.vpoints li::before{content:"✓";display:grid;place-items:center;width:23px;height:23px;border-radius:7px;background:var(--gold);color:var(--on-gold);font-weight:800;font-size:.8rem;flex:none}
+.video-frame{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:16/10;background:#000;border:1px solid var(--border);box-shadow:var(--shadow)}
+.video-frame video{width:100%;height:100%;object-fit:cover;display:block}
+.video-frame .play{position:absolute;inset:0;display:grid;place-items:center;cursor:pointer;background:rgba(0,0,0,.35);transition:.3s}
+.video-frame .play:hover{background:rgba(0,0,0,.2)}
+.video-frame .play span{width:72px;height:72px;border-radius:50%;background:var(--gold);color:var(--on-gold);display:grid;place-items:center;font-size:1.5rem;padding-left:5px;box-shadow:0 14px 30px -10px rgba(0,0,0,.6);transition:.3s}
+.video-frame .play:hover span{transform:scale(1.08)}
+.video-note{margin-top:.9rem;font-size:.8rem;color:var(--text-soft)}
+
+/* SERVICES */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem}
+.card{background:var(--surface);border-radius:var(--radius);padding:1.9rem 1.6rem;border:1px solid var(--border);transition:.3s;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;height:3px;width:0;background:var(--gold);transition:.35s}
+.card:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:transparent}
+.card:hover::before{width:100%}
+.card .ico{width:50px;height:50px;border-radius:13px;display:grid;place-items:center;font-size:1.4rem;margin-bottom:1rem;background:var(--surface-2);color:var(--gold)}
+.card h3{font-size:1.14rem;font-weight:700;margin-bottom:.45rem}
+.card p{color:var(--text-soft);font-size:.93rem}
+
+/* WHY (glass over parallax car) */
+.why{position:relative;overflow:hidden;min-height:640px;display:flex;align-items:center}
+.why-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.why-bg img{position:absolute;inset:0;width:100%;height:130%;top:-15%;object-fit:cover;filter:grayscale(.2) brightness(.5)}
+.why-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,13,.4),rgba(11,11,13,.82) 60%)}
+.why-inner{position:relative;z-index:1;width:100%}
+.why-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:2.5rem;align-items:center}
+.why-head h2{color:#f4f1ea;font-size:clamp(1.9rem,4vw,2.9rem);font-weight:800}
+.why-head h2 .gold{color:var(--gold)}
+.why-head p{color:rgba(244,241,234,.7);margin-top:1rem;max-width:24rem}
+.why-stats{display:flex;gap:2rem;margin-top:1.8rem;flex-wrap:wrap}
+.why-stat .num{font-family:'Sora';font-weight:800;font-size:1.8rem;color:var(--gold)}
+.why-stat .lbl{font-size:.78rem;color:rgba(244,241,234,.65)}
+.glass-stack{display:flex;flex-direction:column;gap:1rem}
+.gcard{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-border);border-radius:18px;padding:1.5rem 1.6rem;color:#f4f1ea}
+.gcard .gi{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--gold);display:grid;place-items:center;color:var(--gold);margin-bottom:.8rem;font-size:1rem}
+.gcard h3{font-size:1.08rem;margin-bottom:.4rem}
+.gcard h3 .gold{color:var(--gold)}
+.gcard p{font-size:.88rem;color:rgba(244,241,234,.72)}
+
+/* BRANDS */
+.brands{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.brand-chip{flex:0 0 auto;min-width:130px;height:84px;display:grid;place-items:center;background:var(--surface);border:1px solid var(--border);border-radius:14px;font-family:'Sora';font-weight:700;font-size:1.05rem;letter-spacing:.04em;color:var(--text-soft);transition:.3s}
+.brand-chip:hover{color:var(--text);border-color:var(--gold);transform:translateY(-4px)}
+.brand-chip.feat{background:var(--gold);color:var(--on-gold);border-color:var(--gold);box-shadow:0 16px 34px -16px var(--gold)}
+
+/* FAQ */
+.faq{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:.8rem}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.3s}
+.faq-item.open{border-color:var(--gold)}
+.faq-q{width:100%;text-align:left;background:transparent;border:0;cursor:pointer;padding:1.15rem 1.4rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;color:var(--text);font-family:inherit;font-size:1rem;font-weight:500}
+body.zh .faq-q{font-family:'Noto Sans SC'}
+.faq-q .ic{flex:none;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;color:var(--gold);transition:.3s}
+.faq-item.open .faq-q .ic{transform:rotate(45deg);background:var(--gold);color:var(--on-gold);border-color:var(--gold)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-a p{padding:0 1.4rem 1.2rem;color:var(--text-soft);font-size:.93rem}
+
+/* CTA BANNER (parallax) */
+.cta-banner{position:relative;overflow:hidden;min-height:520px;display:flex;align-items:center;text-align:center}
+.cta-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.cta-bg img{position:absolute;inset:0;width:100%;height:135%;top:-17%;object-fit:cover;filter:brightness(.45)}
+.cta-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 60%,transparent,rgba(11,11,13,.85)),linear-gradient(180deg,var(--bg),transparent 25%,transparent 70%,var(--bg))}
+.cta-inner{position:relative;z-index:1;width:100%}
+.cta-inner h2{color:#f4f1ea;font-size:clamp(2rem,4.4vw,3.2rem);font-weight:800}
+.cta-inner p{color:rgba(244,241,234,.78);max-width:34rem;margin:1rem auto 1.8rem}
+
+/* CONTACT */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3rem;background:var(--surface);border:1px solid var(--border);border-radius:26px;padding:clamp(2rem,4vw,3.4rem)}
+.contact-list{display:flex;flex-direction:column;gap:1rem;margin-top:1.4rem}
+.contact-list a{display:flex;align-items:center;gap:.9rem;font-weight:600}
+.contact-list .ci{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--surface-2);color:var(--gold);font-size:1.1rem}
+.form label{display:block;font-size:.8rem;font-weight:600;margin:.85rem 0 .35rem;color:var(--text-soft)}
+.form input,.form select,.form textarea{width:100%;padding:.78rem 1rem;border-radius:11px;border:1px solid var(--border);background:var(--bg-2);color:var(--text);font-family:inherit;font-size:.95rem}
+.form input:focus,.form select:focus,.form textarea:focus{outline:none;border-color:var(--gold)}
+.form .btn{width:100%;justify-content:center;margin-top:1.2rem}
+
+/* FOOTER */
+footer{padding:3.5rem 0 2.5rem;border-top:1px solid var(--border)}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+.foot-grid p{color:var(--text-soft);font-size:.93rem;max-width:24rem;margin-top:1rem}
+.foot-col h4{font-family:'Sora';font-size:.76rem;text-transform:uppercase;letter-spacing:.16em;color:var(--gold);margin-bottom:.9rem}
+body.zh .foot-col h4{font-family:'Noto Sans SC';letter-spacing:.05em}
+.foot-col a{display:block;color:var(--text-soft);font-size:.92rem;margin-bottom:.55rem;transition:.2s}
+.foot-col a:hover{color:var(--text)}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;font-size:.84rem;color:var(--text-soft);flex-wrap:wrap;gap:.6rem}
+
+.fab{position:fixed;right:20px;bottom:20px;z-index:60;background:#25d366;color:#fff;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:1.55rem;box-shadow:0 16px 32px -12px rgba(37,211,102,.6);transition:.3s}
+.fab:hover{transform:scale(1.08)}
+.progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:70;background:linear-gradient(90deg,var(--gold-deep),var(--gold-soft))}
+
+@media(max-width:900px){
+  .hero-grid,.video-grid,.why-grid,.contact-wrap,.foot-grid{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}.nav-cta{display:none}
+  .hero{min-height:92vh;padding-top:7rem;padding-bottom:3rem}
+  .hero-mega{top:14%}
+  .hero-grid{gap:1rem}
+  .why-bg img{height:115%;top:-7%}
+}
+@media(max-width:560px){
+  .cards{grid-template-columns:1fr}
+  .why-stats{gap:1.4rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  [data-parallax]{transform:none!important}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header id="header">
+  <div class="wrap nav">
+    <a href="#top" class="brand"><img class="logo" src="logo.png" alt="Cheap Cars Export logo">Cheap<b>Cars</b>Export</a>
+    <nav class="nav-links">
+      <a href="#inventory"><span class="en-only">Inventory</span><span class="zh-only">车源</span></a>
+      <a href="#services"><span class="en-only">Services</span><span class="zh-only">服务</span></a>
+      <a href="#why"><span class="en-only">Why us</span><span class="zh-only">为什么选我们</span></a>
+      <a href="#faq"><span class="en-only">FAQ</span><span class="zh-only">常见问题</span></a>
+      <a href="#contact"><span class="en-only">Contact</span><span class="zh-only">联系</span></a>
+    </nav>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode"><span class="moon">☾</span><span class="sun">☀</span></button>
+      <div class="lang">
+        <button id="lang-en" class="active" onclick="setLang('en')">EN</button>
+        <button id="lang-zh" onclick="setLang('zh')">中文</button>
+      </div>
+      <a href="#contact" class="btn btn-gold nav-cta"><span class="en-only">Get a quote</span><span class="zh-only">获取报价</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-stage">
+    <div class="hero-mega"><span class="en-only">LUXURY &amp; VALUE</span><span class="zh-only">豪车 · 好价</span></div>
+    <div class="hero-car"><img src="car-mercedes-s.jpg" alt="Black Mercedes-Benz S-Class — premium export vehicle" data-parallax="0.05"></div>
+  </div>
+  <div class="hero-content">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><span class="en-only">Guangzhou, China · Worldwide export</span><span class="zh-only">中国广州 · 全球出口</span></span>
+        <h1>
+          <span class="en-only">Drive the Legacy<br>of <span class="gold">Value.</span></span>
+          <span class="zh-only block-el">传承价值，<br><span class="gold">驰骋全球。</span></span>
+        </h1>
+      </div>
+      <div class="lead-wrap">
+        <p class="lead"><span class="en-only">We source, inspect and ship new and used cars from across China — SUVs, MPVs, EVs and luxury sedans — to Ghana, Africa and beyond at honest, competitive prices.</span><span class="zh-only">我们在全中国寻源、验车并发运全新及二手车辆 —— SUV、MPV、电动车与豪华轿车，以诚实公道的价格运往加纳、非洲及世界各地。</span></p>
+        <div class="hero-cta">
+          <a href="#inventory" class="btn btn-outline"><span class="en-only">Browse collection ↗</span><span class="zh-only">浏览车源 ↗</span></a>
+          <a href="#contact" class="btn btn-gold"><span class="en-only">Get a quote ↗</span><span class="zh-only">获取报价 ↗</span></a>
+        </div>
+        <div class="hero-tags">
+          <span class="tag"><span class="en-only">Worldwide shipping</span><span class="zh-only">全球运输</span></span>
+          <span class="tag"><span class="en-only">Free inspection</span><span class="zh-only">免费验车</span></span>
+          <span class="tag"><span class="en-only">New &amp; used</span><span class="zh-only">全新及二手</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTIONS -->
+<section class="block" id="inventory">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow center"><span class="en-only">Recent stock</span><span class="zh-only">最新车源</span></span>
+      <h2><span class="en-only">Explore our collection</span><span class="zh-only">探索我们的车源</span></h2>
+      <p><span class="en-only">A handpicked look at cars we've recently sourced and prepared for export. Ask on WhatsApp for live availability and a landed price.</span><span class="zh-only">精选我们近期寻源并备妥出口的车辆。欢迎在 WhatsApp 询问现货与到岸价。</span></p>
+    </div>
+    <div class="carousel reveal">
+      <div class="track" id="track">
+        <article class="ccard">
+          <div class="ph"><img src="car-glc-red.jpg" alt="Red Mercedes GLC Coupé"><div class="tags"><span class="tag">Coupé · AMG</span><span class="tag"><span class="en-only">Red</span><span class="zh-only">红色</span></span></div></div>
+          <div class="body"><div class="yr">2023</div><h3>Mercedes-Benz GLC Coupé</h3><div class="row"><span class="price"><span class="en-only">Enquire</span><span class="zh-only">询价</span></span><a class="go" href="https://wa.me/8615692496753">↗</a></div></div>
+        </article>
+        <article class="ccard">
+          <div class="ph"><img src="car-honda-crv.jpg" alt="White Honda CR-V"><div class="tags"><span class="tag">SUV</span><span class="tag"><span class="en-only">White · New</span><span class="zh-only">白色 · 全新</span></span></div></div>
+          <div class="body"><div class="yr">2024</div><h3>Honda CR-V</h3><div class="row"><span class="price"><span class="en-only">Enquire</span><span class="zh-only">询价</span></span><a class="go" href="https://wa.me/8615692496753">↗</a></div></div>
+        </article>
+        <article class="ccard">
+          <div class="ph"><img src="car-gac-master.jpg" alt="GAC Master MPV"><div class="tags"><span class="tag">MPV · 7-seat</span><span class="tag"><span class="en-only">Silver</span><span class="zh-only">银色</span></span></div></div>
+          <div class="body"><div class="yr">2024</div><h3>GAC Master</h3><div class="row"><span class="price"><span class="en-only">Enquire</span><span class="zh-only">询价</span></span><a class="go" href="https://wa.me/8615692496753">↗</a></div></div>
+        </article>
+        <article class="ccard">
+          <div class="ph"><img src="car-mercedes-s.jpg" alt="Black Mercedes-Benz S-Class"><div class="tags"><span class="tag">Sedan</span><span class="tag"><span class="en-only">Black</span><span class="zh-only">黑色</span></span></div></div>
+          <div class="body"><div class="yr">2023</div><h3>Mercedes-Benz S-Class</h3><div class="row"><span class="price"><span class="en-only">Enquire</span><span class="zh-only">询价</span></span><a class="go" href="https://wa.me/8615692496753">↗</a></div></div>
+        </article>
+        <article class="ccard">
+          <div class="ph"><img src="car-gac-master.jpg" alt="GAC Master VIP"><div class="tags"><span class="tag">MPV · VIP</span><span class="tag"><span class="en-only">Chauffeur</span><span class="zh-only">商务</span></span></div></div>
+          <div class="body"><div class="yr">2024</div><h3>GAC Master · VIP</h3><div class="row"><span class="price"><span class="en-only">Enquire</span><span class="zh-only">询价</span></span><a class="go" href="https://wa.me/8615692496753">↗</a></div></div>
+        </article>
+      </div>
+      <div class="car-nav">
+        <button onclick="slide(-1)" aria-label="Previous">‹</button>
+        <button onclick="slide(1)" aria-label="Next">›</button>
+      </div>
+      <div class="view-all"><a href="https://wa.me/8615692496753" class="btn btn-ghost"><span class="en-only">View all cars</span><span class="zh-only">查看全部车辆</span></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="block video-sec" id="watch">
+  <div class="wrap video-grid">
+    <div class="reveal">
+      <span class="eyebrow"><span class="en-only">See it in motion</span><span class="zh-only">动态实拍</span></span>
+      <h2><span class="en-only">From our yard to your vessel</span><span class="zh-only">从车场到您的货轮</span></h2>
+      <p><span class="en-only">Real footage from Guangzhou — sourcing, inspection and loading — so buyers thousands of miles away can buy with total confidence.</span><span class="zh-only">来自广州的真实影像 —— 选车、验车、装船，让远在万里之外的买家也能完全放心。</span></p>
+      <ul class="vpoints">
+        <li><span class="en-only">Walkaround &amp; inspection videos for every unit</span><span class="zh-only">每台车都有环绕展示与验车视频</span></li>
+        <li><span class="en-only">Live loading footage before the ship departs</span><span class="zh-only">开船前的实时装船影像</span></li>
+        <li><span class="en-only">Sent straight to your WhatsApp on request</span><span class="zh-only">可应要求直接发送至您的 WhatsApp</span></li>
+      </ul>
+      <div class="hero-cta" style="margin-top:1.6rem"><a href="https://wa.me/8615692496753" class="btn btn-gold">📹 <span class="en-only">Request a live video</span><span class="zh-only">索取实时视频</span></a></div>
+    </div>
+    <div class="reveal" data-d="1">
+      <div class="video-frame">
+        <video id="promo" controls preload="none" poster="car-honda-crv.jpg"><source src="promo.mp4" type="video/mp4"></video>
+        <div class="play" id="playBtn"><span>▶</span></div>
+      </div>
+      <p class="video-note"><span class="en-only">Name your clip <b>promo.mp4</b> in this folder, or send us the link to embed.</span><span class="zh-only">将视频命名为 <b>promo.mp4</b> 放入同一文件夹，或把链接发给我们嵌入。</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="block" id="services">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow center"><span class="en-only">What we do</span><span class="zh-only">我们的服务</span></span>
+      <h2><span class="en-only">From a Chinese showroom to your port</span><span class="zh-only">从中国展厅到您的港口</span></h2>
+      <p><span class="en-only">One contact handles the entire chain, so you buy with confidence from anywhere in the world.</span><span class="zh-only">一个联系人负责全部环节，让您在世界任何角落都能放心购车。</span></p>
+    </div>
+    <div class="cards">
+      <div class="card reveal"><div class="ico">🔎</div><h3><span class="en-only">Vehicle sourcing</span><span class="zh-only">车辆寻源</span></h3><p><span class="en-only">Tell us the model, budget and condition; we find the best match across China's market.</span><span class="zh-only">告诉我们车型、预算与车况，我们在全国市场为您找到最合适的车。</span></p></div>
+      <div class="card reveal" data-d="1"><div class="ico">🛡️</div><h3><span class="en-only">Pre-export inspection</span><span class="zh-only">出口前验车</span></h3><p><span class="en-only">Mileage, paint, mechanics and documents checked before a single dollar leaves your account.</span><span class="zh-only">付款前，里程、漆面、机械与证件逐一查验。</span></p></div>
+      <div class="card reveal" data-d="2"><div class="ico">🚢</div><h3><span class="en-only">Ocean shipping</span><span class="zh-only">海运出口</span></h3><p><span class="en-only">RoRo and container loading to Tema, Lagos and ports across Africa, tracked yard to vessel.</span><span class="zh-only">滚装与集装箱装运至特马、拉各斯及非洲各港口，全程跟踪。</span></p></div>
+      <div class="card reveal"><div class="ico">📑</div><h3><span class="en-only">Export paperwork</span><span class="zh-only">出口单证</span></h3><p><span class="en-only">Invoice, export declaration and shipping docs handled end-to-end for smooth clearance.</span><span class="zh-only">发票、报关与运输单证一手包办，清关顺畅。</span></p></div>
+      <div class="card reveal" data-d="1"><div class="ico">🤝</div><h3><span class="en-only">Purchase assistance</span><span class="zh-only">代购协助</span></h3><p><span class="en-only">Buying in China yourself? We negotiate, verify the seller and secure the deal for you.</span><span class="zh-only">想自己在中国买车？我们替您议价、核实卖家并促成交易。</span></p></div>
+      <div class="card reveal" data-d="2"><div class="ico">⚡</div><h3><span class="en-only">EV &amp; new-energy</span><span class="zh-only">电动与新能源</span></h3><p><span class="en-only">From BYD to Tata Harrier EV, we source the latest electric and hybrid stock.</span><span class="zh-only">从比亚迪到 Tata Harrier EV，我们寻找最新电动与混动车源。</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="why">
+  <div class="why-bg" data-parallax="0.05"><img src="car-honda-crv.jpg" alt="Inspected vehicle ready for export"></div>
+  <div class="why-inner">
+    <div class="wrap why-grid">
+      <div class="why-head reveal">
+        <span class="eyebrow"><span class="en-only">Why buyers trust us</span><span class="zh-only">买家为何信任我们</span></span>
+        <h2><span class="en-only">Why choose us for<br>your <span class="gold">next car</span></span><span class="zh-only block-el">为何选择我们<br>购买<span class="gold">下一台车</span></span></h2>
+        <p><span class="en-only">A Guangzhou team that treats your money like our own — transparent, fast, and on the ground where the cars are.</span><span class="zh-only">一支把您的钱当自己钱看的广州团队 —— 透明、快速，且就在车源所在地。</span></p>
+        <div class="why-stats">
+          <div class="why-stat"><div class="num" data-count="3700" data-suffix="+">0</div><div class="lbl"><span class="en-only">Buyers following</span><span class="zh-only">关注买家</span></div></div>
+          <div class="why-stat"><div class="num" data-count="12" data-suffix="+">0</div><div class="lbl"><span class="en-only">Countries shipped</span><span class="zh-only">发运国家</span></div></div>
+          <div class="why-stat"><div class="num" data-count="100" data-suffix="%">0</div><div class="lbl"><span class="en-only">Inspected</span><span class="zh-only">均经验车</span></div></div>
+        </div>
+      </div>
+      <div class="glass-stack reveal" data-d="1">
+        <div class="gcard"><div class="gi">✓</div><h3><span class="en-only">Certified, <span class="gold">honestly inspected</span> vehicles</span><span class="zh-only">经过<span class="gold">如实验车</span>的认证车辆</span></h3><p><span class="en-only">Every car is checked for quality, mileage and history — photos and a report before you pay.</span><span class="zh-only">每台车的品质、里程与历史都会查验 —— 付款前提供照片与报告。</span></p></div>
+        <div class="gcard"><div class="gi">✈</div><h3><span class="en-only">Seamless <span class="gold">worldwide delivery</span></span><span class="zh-only">无缝<span class="gold">全球交付</span></span></h3><p><span class="en-only">From Guangzhou to your port, we bring your vehicle to your doorstep anywhere in the world.</span><span class="zh-only">从广州到您的港口，我们把车辆送达世界任何角落。</span></p></div>
+        <div class="gcard"><div class="gi">★</div><h3><span class="en-only">Personal <span class="gold">export concierge</span></span><span class="zh-only">专属<span class="gold">出口顾问</span></span></h3><p><span class="en-only">One point of contact on WhatsApp, replying fast and guiding you through every step.</span><span class="zh-only">WhatsApp 一对一联系，快速回复，全程为您指引。</span></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section class="block">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow center"><span class="en-only">Brands we export</span><span class="zh-only">我们出口的品牌</span></span>
+      <h2><span class="en-only">From everyday to extraordinary</span><span class="zh-only">从日常到非凡</span></h2>
+    </div>
+    <div class="brands reveal">
+      <div class="brand-chip">GAC</div>
+      <div class="brand-chip">Changan</div>
+      <div class="brand-chip">BYD</div>
+      <div class="brand-chip feat">Jetour</div>
+      <div class="brand-chip">Honda</div>
+      <div class="brand-chip">Toyota</div>
+      <div class="brand-chip">Mercedes</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="block" id="faq">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow center"><span class="en-only">Good to know</span><span class="zh-only">您需要了解</span></span>
+      <h2><span class="en-only">Your questions, perfectly answered</span><span class="zh-only">您的疑问，逐一解答</span></h2>
+    </div>
+    <div class="faq reveal" id="faqList">
+      <div class="faq-item"><button class="faq-q"><span><span class="en-only">What makes Cheap Cars Export different?</span><span class="zh-only">Cheap Cars Export 有何不同？</span></span><span class="ic">+</span></button><div class="faq-a"><p><span class="en-only">We're based in Guangzhou, China's auto-export hub, with direct dealer and port access. One contact handles sourcing, inspection, paperwork and shipping — and we film and photograph each car so you buy with confidence.</span><span class="zh-only">我们位于中国汽车出口中心广州，直通车商与港口。一个联系人负责寻源、验车、单证与运输，并为每台车拍摄照片与视频，让您安心购买。</span></p></div></div>
+      <div class="faq-item"><button class="faq-q"><span><span class="en-only">Are all vehicles inspected before export?</span><span class="zh-only">出口前都会验车吗？</span></span><span class="ic">+</span></button><div class="faq-a"><p><span class="en-only">Yes. Every unit is checked for mileage, paint, mechanics and documents, and you receive photos and a report before any payment is made.</span><span class="zh-only">是的。每台车的里程、漆面、机械与证件都会查验，付款前您将收到照片与报告。</span></p></div></div>
+      <div class="faq-item"><button class="faq-q"><span><span class="en-only">Do you ship internationally?</span><span class="zh-only">提供国际运输吗？</span></span><span class="ic">+</span></button><div class="faq-a"><p><span class="en-only">Yes — by RoRo or container to Tema, Lagos and ports across Africa and beyond, with tracking from our yard to the vessel.</span><span class="zh-only">提供 —— 以滚装或集装箱运往特马、拉各斯及非洲与世界各港口，从车场到货轮全程跟踪。</span></p></div></div>
+      <div class="faq-item"><button class="faq-q"><span><span class="en-only">Can I get a video before buying?</span><span class="zh-only">购买前能看视频吗？</span></span><span class="ic">+</span></button><div class="faq-a"><p><span class="en-only">Absolutely. Ask on WhatsApp and we'll send a walkaround and inspection video, plus live loading footage before the ship departs.</span><span class="zh-only">当然可以。在 WhatsApp 联系我们，即可获得环绕展示与验车视频，以及开船前的实时装船影像。</span></p></div></div>
+      <div class="faq-item"><button class="faq-q"><span><span class="en-only">What payment methods do you accept?</span><span class="zh-only">接受哪些付款方式？</span></span><span class="ic">+</span></button><div class="faq-a"><p><span class="en-only">We'll confirm the available secure options for your country when we quote. Message us on WhatsApp for details.</span><span class="zh-only">报价时我们会确认适合您所在国家的安全付款方式。详情请通过 WhatsApp 联系我们。</span></p></div></div>
+      <div class="faq-item"><button class="faq-q"><span><span class="en-only">How does the export process work?</span><span class="zh-only">出口流程是怎样的？</span></span><span class="ic">+</span></button><div class="faq-a"><p><span class="en-only">Tell us the car, get a quote, we inspect and confirm, you pay and we book the vessel, then we ship and track it all the way to your port.</span><span class="zh-only">告诉我们车型、获取报价、我们验车确认、您付款后我们订舱，随后发货并全程跟踪直到您的港口。</span></p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-bg" data-parallax="0.06"><img src="car-glc-red.jpg" alt="Premium car ready for export"></div>
+  <div class="cta-inner">
+    <div class="wrap">
+      <span class="eyebrow center"><span class="en-only">Ready when you are</span><span class="zh-only">随时为您效劳</span></span>
+      <h2><span class="en-only">Drive beyond expectations</span><span class="zh-only">超越期待，自在驰骋</span></h2>
+      <p><span class="en-only">Let our team guide you to the right car at the right price, sourced in China and delivered to your door.</span><span class="zh-only">让我们的团队为您找到合适的车与合适的价格，中国寻源，直送到家。</span></p>
+      <div class="hero-cta" style="justify-content:center"><a href="#contact" class="btn btn-gold"><span class="en-only">Get your quote ↗</span><span class="zh-only">立即获取报价 ↗</span></a><a href="https://wa.me/8615692496753" class="btn btn-outline">💬 WhatsApp</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="contact-wrap reveal">
+      <div>
+        <span class="eyebrow"><span class="en-only">Get a quote</span><span class="zh-only">获取报价</span></span>
+        <h2 style="font-size:clamp(1.7rem,3.4vw,2.4rem);font-weight:800;margin:.6rem 0 .4rem"><span class="en-only">Import your next car</span><span class="zh-only">进口您的下一台车</span></h2>
+        <p style="color:var(--text-soft)"><span class="en-only">Send the model you want and where it's headed — we usually reply on WhatsApp within the hour.</span><span class="zh-only">把您想要的车型与目的地发给我们 —— 通常一小时内通过 WhatsApp 回复。</span></p>
+        <div class="contact-list">
+          <a href="https://wa.me/8615692496753"><span class="ci">💬</span>WhatsApp · +86 156 9249 6753</a>
+          <a href="https://instagram.com/cheap_exports"><span class="ci">📸</span>Instagram · @cheap_exports</a>
+          <a href="#"><span class="ci">📍</span><span class="en-only">Guangzhou, China — global shipping</span><span class="zh-only">中国广州 —— 全球发货</span></a>
+        </div>
+      </div>
+      <form class="form" id="quoteForm" onsubmit="return sendQuote(event)">
+        <label><span class="en-only">Your name</span><span class="zh-only">您的姓名</span></label>
+        <input id="f-name" placeholder="e.g. Kwame Mensah" required>
+        <label><span class="en-only">Phone / WhatsApp</span><span class="zh-only">电话 / WhatsApp</span></label>
+        <input id="f-phone" placeholder="+233 ..." required>
+        <label><span class="en-only">Car you want</span><span class="zh-only">您想要的车型</span></label>
+        <input id="f-car" placeholder="e.g. Honda CR-V 2024" required>
+        <label><span class="en-only">Destination</span><span class="zh-only">目的地</span></label>
+        <select id="f-dest"><option>Ghana — Tema</option><option>Nigeria — Lagos</option><option>Other Africa</option><option>Elsewhere</option></select>
+        <label><span class="en-only">Message (optional)</span><span class="zh-only">留言（选填）</span></label>
+        <textarea id="f-msg" rows="3" placeholder="Budget, colour, condition..."></textarea>
+        <button class="btn btn-gold" type="submit"><span class="en-only">Send via WhatsApp →</span><span class="zh-only">通过 WhatsApp 发送 →</span></button>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="brand"><img class="logo" src="logo.png" alt="Cheap Cars Export logo">Cheap<b>Cars</b>Export</a>
+        <p><span class="en-only">Crafting effortless car export since Guangzhou — sourcing, inspection and worldwide shipping of new and used vehicles at honest prices.</span><span class="zh-only">源自广州的省心汽车出口 —— 以诚实价格寻源、验车并向全球发运全新及二手车辆。</span></p>
+      </div>
+      <div class="foot-col">
+        <h4><span class="en-only">Explore</span><span class="zh-only">导航</span></h4>
+        <a href="#inventory"><span class="en-only">Inventory</span><span class="zh-only">车源</span></a>
+        <a href="#services"><span class="en-only">Services</span><span class="zh-only">服务</span></a>
+        <a href="#why"><span class="en-only">Why us</span><span class="zh-only">为什么选我们</span></a>
+        <a href="#faq"><span class="en-only">FAQ</span><span class="zh-only">常见问题</span></a>
+      </div>
+      <div class="foot-col">
+        <h4><span class="en-only">Connect</span><span class="zh-only">联系</span></h4>
+        <a href="https://wa.me/8615692496753">WhatsApp</a>
+        <a href="https://instagram.com/cheap_exports">Instagram</a>
+        <a href="#contact"><span class="en-only">Get a quote</span><span class="zh-only">获取报价</span></a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Cheap Cars Export · <span class="en-only">Guangzhou, China</span><span class="zh-only">中国广州</span></span>
+      <span><span class="en-only">Brand names belong to their respective owners.</span><span class="zh-only">品牌名称归各自所有者所有。</span></span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/8615692496753" class="fab" aria-label="Chat on WhatsApp">💬</a>
+
+<script>
+// THEME (night default)
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('cce-theme',t)}catch(e){}}
+function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');}
+try{const st=localStorage.getItem('cce-theme');if(st)applyTheme(st);}catch(e){}
+
+// LANGUAGE
+function setLang(l){
+  document.body.classList.toggle('zh',l==='zh');
+  document.documentElement.lang=l==='zh'?'zh':'en';
+  document.getElementById('lang-en').classList.toggle('active',l==='en');
+  document.getElementById('lang-zh').classList.toggle('active',l==='zh');
+  try{localStorage.setItem('cce-lang',l)}catch(e){}
+}
+try{const sl=localStorage.getItem('cce-lang');if(sl==='zh')setLang('zh');}catch(e){}
+
+// scroll progress + header
+const header=document.getElementById('header'),progress=document.getElementById('progress');
+function onScroll(){const s=scrollY;header.classList.toggle('scrolled',s>30);const h=document.documentElement.scrollHeight-innerHeight;progress.style.width=(s/h*100)+'%';}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+// reveal
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// count-up
+const cio=new IntersectionObserver((es)=>{es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,target=+el.dataset.count,suf=el.dataset.suffix||'';let cur=0,step=target/60;const t=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(t);}el.textContent=Math.round(cur).toLocaleString()+suf;},22);cio.unobserve(el);});},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(c=>cio.observe(c));
+
+// PARALLAX
+const px=[...document.querySelectorAll('[data-parallax]')];
+function parallax(){
+  const vh=innerHeight;
+  px.forEach(el=>{
+    const r=el.getBoundingClientRect();
+    const center=r.top+r.height/2;
+    const off=center-vh/2;
+    const sp=parseFloat(el.dataset.parallax)||.1;
+    el.style.transform=`translate3d(0,${(-off*sp).toFixed(1)}px,0)`;
+  });
+}
+addEventListener('scroll',parallax,{passive:true});addEventListener('resize',parallax);parallax();
+
+// carousel
+const track=document.getElementById('track');
+function slide(dir){const card=track.querySelector('.ccard');const w=card?card.offsetWidth+22:320;track.scrollBy({left:dir*w,behavior:'smooth'});}
+
+// FAQ
+document.querySelectorAll('#faqList .faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.parentElement,a=item.querySelector('.faq-a'),open=item.classList.contains('open');
+    document.querySelectorAll('#faqList .faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight=null;});
+    if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
+  });
+});
+
+// video
+const video=document.getElementById('promo'),playBtn=document.getElementById('playBtn');
+if(playBtn){playBtn.addEventListener('click',()=>{playBtn.style.display='none';video.play().catch(()=>{video.controls=true;});});video.addEventListener('pause',()=>{if(video.currentTime===0)playBtn.style.display='grid';});}
+
+// quote
+function sendQuote(e){e.preventDefault();const g=id=>document.getElementById(id).value.trim();const txt=`Hi Cheap Cars Export! I'd like a quote.%0A%0AName: ${g('f-name')}%0APhone: ${g('f-phone')}%0ACar: ${g('f-car')}%0ADestination: ${g('f-dest')}%0ADetails: ${g('f-msg')||'-'}`;window.open(`https://wa.me/8615692496753?text=${txt}`,'_blank');return false;}
+</script>
+</body>
+</html>
