@@ -29,7 +29,9 @@
   --glass:rgba(255,255,255,.6); --glass-border:rgba(22,20,18,.14);
   --nav-bg:rgba(243,239,230,.86); --chip-bg:rgba(255,255,255,.92);
 }
-:root{--band-text:#f4f1ea;--band-soft:rgba(244,241,234,.74);--radius:16px}
+:root{--band-text:#f4f1ea;--band-soft:rgba(244,241,234,.74);--radius:16px;
+  /* hero car focal point — lower = show more bottom. 50% 100% = very bottom, 50% 50% = centre */
+  --hero-focus:50% 78%}
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -83,9 +85,9 @@ body.zh .btn,body.zh .lang button,body.zh .brand{font-family:'Noto Sans SC',sans
 /* ===== HERO ===== */
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:#0b0b0d;isolation:isolate}
 
-/* background car — sharp, gently graded */
+/* background car — sharp, stable, anchored to show the lower body */
 .hero-car{position:absolute;inset:0;z-index:0;overflow:hidden}
-.hero-car img{position:absolute;top:-8%;left:0;width:100%;height:116%;object-fit:cover;object-position:50% 44%;filter:brightness(.82) contrast(1.04) saturate(1.06);will-change:transform}
+.hero-car img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--hero-focus);filter:brightness(.88) contrast(1.05) saturate(1.06)}
 
 /* giant watermark word — stacked, embossed outline */
 .hero-mega{position:absolute;top:10%;left:0;right:0;z-index:1;text-align:center;pointer-events:none;padding:0 4vw}
@@ -93,11 +95,11 @@ body.zh .btn,body.zh .lang button,body.zh .brand{font-family:'Noto Sans SC',sans
   color:rgba(244,241,234,.07);-webkit-text-stroke:1.4px rgba(244,241,234,.3)}
 body.zh .hero-mega span{font-family:'Noto Sans SC';letter-spacing:.04em;line-height:.94}
 
-/* legibility veils (above photo + word, below content) */
+/* legibility veils — light through the car, dark only behind the text */
 .hero-veil{position:absolute;inset:0;z-index:2;pointer-events:none;
   background:
-   radial-gradient(135% 95% at 50% 28%,transparent 36%,rgba(11,11,13,.5) 100%),
-   linear-gradient(180deg,rgba(11,11,13,.55) 0%,rgba(11,11,13,.1) 30%,rgba(11,11,13,.12) 48%,rgba(11,11,13,.74) 72%,rgba(11,11,13,.93) 88%,var(--bg) 100%)}
+   radial-gradient(130% 92% at 50% 26%,transparent 44%,rgba(11,11,13,.4) 100%),
+   linear-gradient(180deg,rgba(11,11,13,.45) 0%,rgba(11,11,13,.05) 26%,rgba(11,11,13,.05) 46%,rgba(11,11,13,.45) 65%,rgba(11,11,13,.88) 85%,var(--bg) 100%)}
 
 /* content — single aligned column */
 .hero-content{position:relative;z-index:3;width:100%;padding:9rem 0 clamp(4rem,9vh,6rem)}
@@ -300,7 +302,7 @@ body.zh .foot-col h4{font-family:'Noto Sans SC';letter-spacing:.05em}
 <main id="top">
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-car"><img src="car-mercedes-s.jpg" alt="Black Mercedes-Benz S-Class — premium export vehicle" data-parallax="0.05"></div>
+  <div class="hero-car"><img src="car-mercedes-s.jpg" alt="Black Mercedes-Benz S-Class — premium export vehicle"></div>
   <div class="hero-mega" aria-hidden="true">
     <span class="en-only">LUXURY<br>VALUE</span>
     <span class="zh-only">豪车<br>好价</span>
