@@ -80,28 +80,44 @@ body.zh .btn,body.zh .lang button,body.zh .brand{font-family:'Noto Sans SC',sans
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
 .nav .mobile{display:none}
 
-/* HERO */
-.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:3rem;overflow:hidden;background:var(--bg)}
-.hero-stage{position:absolute;inset:0;z-index:0;overflow:hidden}
-.hero-stage::after{content:"";position:absolute;inset:0;z-index:2;background:
-  linear-gradient(180deg,rgba(11,11,13,.5) 0%,rgba(11,11,13,.15) 28%,rgba(11,11,13,.3) 55%,rgba(11,11,13,.86) 90%,var(--bg) 100%)}
-.hero-mega{position:absolute;top:15%;left:0;right:0;text-align:center;z-index:3;pointer-events:none;padding:0 2vw}
-.hero-mega::before{content:"";position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);width:88%;height:150%;z-index:-1;background:radial-gradient(60% 60% at 50% 50%,rgba(11,11,13,.6),transparent 72%);filter:blur(10px)}
-.hero-mega span{font-family:'Sora';font-weight:800;font-size:clamp(2.6rem,10.5vw,9rem);letter-spacing:.02em;line-height:.92;white-space:nowrap;color:#f7f3ea;
-  text-shadow:0 2px 4px rgba(0,0,0,.75),0 6px 16px rgba(0,0,0,.85),0 14px 34px rgba(0,0,0,.8),0 0 70px rgba(217,180,106,.32);
-  -webkit-text-stroke:1.5px rgba(0,0,0,.32)}
-.hero-car{position:absolute;inset:0;z-index:1;overflow:hidden}
-.hero-car img{position:absolute;top:-8%;left:-5%;width:110%;height:116%;object-fit:cover;object-position:50% 42%;filter:blur(3px) brightness(.74) contrast(1.05)}
-.hero-content{position:relative;z-index:3;margin-top:auto}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:end}
-.hero h1{font-size:clamp(2.2rem,4.4vw,3.4rem);font-weight:800;margin:.4rem 0 0}
+/* ===== HERO ===== */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:#0b0b0d;isolation:isolate}
+
+/* background car — sharp, gently graded */
+.hero-car{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-car img{position:absolute;top:-8%;left:0;width:100%;height:116%;object-fit:cover;object-position:50% 44%;filter:brightness(.82) contrast(1.04) saturate(1.06);will-change:transform}
+
+/* giant watermark word — stacked, embossed outline */
+.hero-mega{position:absolute;top:10%;left:0;right:0;z-index:1;text-align:center;pointer-events:none;padding:0 4vw}
+.hero-mega span{font-family:'Sora';font-weight:800;font-size:clamp(3.2rem,15vw,13rem);line-height:.82;letter-spacing:.02em;
+  color:rgba(244,241,234,.07);-webkit-text-stroke:1.4px rgba(244,241,234,.3)}
+body.zh .hero-mega span{font-family:'Noto Sans SC';letter-spacing:.04em;line-height:.94}
+
+/* legibility veils (above photo + word, below content) */
+.hero-veil{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+   radial-gradient(135% 95% at 50% 28%,transparent 36%,rgba(11,11,13,.5) 100%),
+   linear-gradient(180deg,rgba(11,11,13,.55) 0%,rgba(11,11,13,.1) 30%,rgba(11,11,13,.12) 48%,rgba(11,11,13,.74) 72%,rgba(11,11,13,.93) 88%,var(--bg) 100%)}
+
+/* content — single aligned column */
+.hero-content{position:relative;z-index:3;width:100%;padding:9rem 0 clamp(4rem,9vh,6rem)}
+.hero-inner{max-width:48rem}
+.hero h1{font-size:clamp(2.5rem,6.2vw,4.6rem);font-weight:800;color:#f7f3ea;margin:1.1rem 0 0;text-shadow:0 2px 26px rgba(0,0,0,.45)}
 .hero h1 .gold{color:var(--gold)}
-.hero .lead-wrap{padding-bottom:.4rem}
-.hero p.lead{font-size:1rem;color:var(--text-soft);max-width:30rem;margin-bottom:1.3rem}
-.hero-cta{display:flex;gap:.8rem;flex-wrap:wrap}
-.hero-tags{display:flex;gap:1.3rem;margin-top:1.6rem;flex-wrap:wrap;font-weight:500;font-size:.84rem;color:var(--text-soft)}
-.hero-tags span.tag{display:flex;align-items:center;gap:.45rem}
-.hero-tags span.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.hero p.lead{font-size:clamp(1rem,1.25vw,1.12rem);line-height:1.6;color:rgba(244,241,234,.82);max-width:34rem;margin:1.3rem 0 0}
+.hero-cta{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem}
+.hero .btn-outline{color:#f7f3ea;border-color:var(--gold)}
+.hero .btn-outline:hover{color:var(--on-gold);background:var(--gold)}
+.hero-tags{display:flex;gap:.9rem 1.7rem;margin-top:2rem;flex-wrap:wrap;font-weight:500;font-size:.85rem;color:rgba(244,241,234,.72)}
+.hero-tags .tag{display:inline-flex;align-items:center;gap:.5rem}
+.hero-tags .tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);flex:none}
+
+/* scroll cue */
+.hero-scroll{position:absolute;left:50%;bottom:1.4rem;transform:translateX(-50%);z-index:3;display:grid;justify-items:center;gap:.5rem;color:rgba(244,241,234,.55);font-family:'Sora';font-size:.6rem;letter-spacing:.24em;text-transform:uppercase}
+body.zh .hero-scroll{font-family:'Noto Sans SC';letter-spacing:.1em}
+.hero-scroll .mouse{width:22px;height:35px;border:1.5px solid rgba(244,241,234,.4);border-radius:13px;position:relative}
+.hero-scroll .mouse::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;border-radius:2px;background:var(--gold);transform:translateX(-50%);animation:scrollDot 1.6s ease-in-out infinite}
+@keyframes scrollDot{0%{opacity:0;transform:translate(-50%,0)}30%{opacity:1}60%{opacity:1;transform:translate(-50%,9px)}100%{opacity:0;transform:translate(-50%,9px)}}
 
 /* SECTION SHELL */
 section.block{padding:6rem 0}
@@ -234,17 +250,22 @@ body.zh .foot-col h4{font-family:'Noto Sans SC';letter-spacing:.05em}
 .progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:70;background:linear-gradient(90deg,var(--gold-deep),var(--gold-soft))}
 
 @media(max-width:900px){
-  .hero-grid,.video-grid,.why-grid,.contact-wrap,.foot-grid{grid-template-columns:1fr}
+  .video-grid,.why-grid,.contact-wrap,.foot-grid{grid-template-columns:1fr}
   .cards{grid-template-columns:1fr 1fr}
   .nav-links{display:none}.nav-cta{display:none}
-  .hero{min-height:92vh;padding-top:7rem;padding-bottom:3rem}
-  .hero-mega{top:14%}
-  .hero-grid{gap:1rem}
+  .hero-content{padding-top:7.5rem}
+  .hero-mega{top:13%}
   .why-bg img{height:115%;top:-7%}
 }
 @media(max-width:560px){
   .cards{grid-template-columns:1fr}
   .why-stats{gap:1.4rem}
+  .hero-content{padding-top:7rem}
+  .hero-mega{top:12%}
+  .hero-inner{max-width:100%}
+  .hero h1{font-size:clamp(2.3rem,9vw,3rem)}
+  .hero-cta{flex-direction:column;align-items:stretch}
+  .hero-cta .btn{width:100%;justify-content:center}
 }
 @media(prefers-reduced-motion:reduce){
   .reveal{opacity:1;transform:none;transition:none}
@@ -279,20 +300,20 @@ body.zh .foot-col h4{font-family:'Noto Sans SC';letter-spacing:.05em}
 <main id="top">
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-stage">
-    <div class="hero-mega"><span class="en-only">LUXURY &amp; VALUE</span><span class="zh-only">豪车 · 好价</span></div>
-    <div class="hero-car"><img src="car-mercedes-s.jpg" alt="Black Mercedes-Benz S-Class — premium export vehicle" data-parallax="0.05"></div>
+  <div class="hero-car"><img src="car-mercedes-s.jpg" alt="Black Mercedes-Benz S-Class — premium export vehicle" data-parallax="0.05"></div>
+  <div class="hero-mega" aria-hidden="true">
+    <span class="en-only">LUXURY<br>VALUE</span>
+    <span class="zh-only">豪车<br>好价</span>
   </div>
+  <div class="hero-veil"></div>
   <div class="hero-content">
-    <div class="wrap hero-grid">
-      <div>
+    <div class="wrap">
+      <div class="hero-inner">
         <span class="eyebrow"><span class="en-only">Guangzhou, China · Worldwide export</span><span class="zh-only">中国广州 · 全球出口</span></span>
         <h1>
           <span class="en-only">Drive the Legacy<br>of <span class="gold">Value.</span></span>
           <span class="zh-only block-el">传承价值，<br><span class="gold">驰骋全球。</span></span>
         </h1>
-      </div>
-      <div class="lead-wrap">
         <p class="lead"><span class="en-only">We source, inspect and ship new and used cars from across China — SUVs, MPVs, EVs and luxury sedans — to Ghana, Africa and beyond at honest, competitive prices.</span><span class="zh-only">我们在全中国寻源、验车并发运全新及二手车辆 —— SUV、MPV、电动车与豪华轿车，以诚实公道的价格运往加纳、非洲及世界各地。</span></p>
         <div class="hero-cta">
           <a href="#inventory" class="btn btn-outline"><span class="en-only">Browse collection ↗</span><span class="zh-only">浏览车源 ↗</span></a>
@@ -306,6 +327,10 @@ body.zh .foot-col h4{font-family:'Noto Sans SC';letter-spacing:.05em}
       </div>
     </div>
   </div>
+  <a href="#inventory" class="hero-scroll" aria-label="Scroll to inventory">
+    <span class="mouse"></span>
+    <span class="en-only">Scroll</span><span class="zh-only">下滑</span>
+  </a>
 </section>
 
 <!-- COLLECTIONS -->
