@@ -58,6 +58,9 @@ header.scrolled{background:var(--nav-bg);backdrop-filter:blur(16px);box-shadow:0
 .brand{display:flex;align-items:center;gap:.6rem;font-family:'Sora';font-weight:800;font-size:1.1rem;letter-spacing:.01em}
 .brand .logo{width:34px;height:34px;border-radius:9px;object-fit:cover;box-shadow:0 8px 18px -8px var(--gold)}
 .brand b{color:var(--gold)}
+/* brand stays legible over the hero image, then follows the theme once the nav gets a solid background on scroll */
+header:not(.scrolled) .brand{color:#fff}
+header.scrolled .brand{color:var(--text)}
 .nav-links{display:flex;gap:1.9rem;font-weight:500;font-size:.92rem}
 .nav-links a{position:relative;color:var(--text-soft);transition:.2s}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1.5px;background:var(--gold);transition:.25s}
@@ -110,6 +113,9 @@ body.zh .hero-mega span{font-family:'Noto Sans SC';letter-spacing:.04em;line-hei
 .hero-cta{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem}
 .hero .btn-outline{color:#f7f3ea;border-color:var(--gold)}
 .hero .btn-outline:hover{color:var(--on-gold);background:var(--gold)}
+/* WhatsApp / outline button on the darkened CTA banner — keep label white in both themes */
+.cta-banner .btn-outline{color:#f7f3ea;border-color:var(--gold)}
+.cta-banner .btn-outline:hover{color:var(--on-gold);background:var(--gold)}
 .hero-tags{display:flex;gap:.9rem 1.7rem;margin-top:2rem;flex-wrap:wrap;font-weight:500;font-size:.85rem;color:rgba(244,241,234,.72)}
 .hero-tags .tag{display:inline-flex;align-items:center;gap:.5rem}
 .hero-tags .tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);flex:none}
