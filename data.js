@@ -207,28 +207,6 @@ window.SITE_DATA = {
   ],
   "cars": [
     {
-      "id": "car-1782196236914",
-      "featured": false,
-      "category": "suv",
-      "name": {
-        "en": "Caaarrrr",
-        "zh": "新车"
-      },
-      "year": 2026,
-      "image": "",
-      "alt": "",
-      "price": {
-        "en": "Enquire",
-        "zh": "询价"
-      },
-      "tags": [
-        {
-          "en": "",
-          "zh": ""
-        }
-      ]
-    },
-    {
       "id": "glc-coupe",
       "featured": true,
       "category": "coupe",
