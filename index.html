@@ -344,33 +344,14 @@ body.zh .foot-col h4{font-family:'Noto Sans SC';letter-spacing:.05em}
       <p><span class="en-only">A handpicked look at cars we've recently sourced and prepared for export. Ask on WhatsApp for live availability and a landed price.</span><span class="zh-only">精选我们近期寻源并备妥出口的车辆。欢迎在 WhatsApp 询问现货与到岸价。</span></p>
     </div>
     <div class="carousel reveal">
-      <div class="track" id="track">
-        <article class="ccard">
-          <div class="ph"><img src="car-glc-red.jpg" alt="Red Mercedes GLC Coupé"><div class="tags"><span class="tag">Coupé · AMG</span><span class="tag"><span class="en-only">Red</span><span class="zh-only">红色</span></span></div></div>
-          <div class="body"><div class="yr">2023</div><h3>Mercedes-Benz GLC Coupé</h3><div class="row"><span class="price"><span class="en-only">Enquire</span><span class="zh-only">询价</span></span><a class="go" href="https://wa.me/8615692496753">↗</a></div></div>
-        </article>
-        <article class="ccard">
-          <div class="ph"><img src="car-honda-crv.jpg" alt="White Honda CR-V"><div class="tags"><span class="tag">SUV</span><span class="tag"><span class="en-only">White · New</span><span class="zh-only">白色 · 全新</span></span></div></div>
-          <div class="body"><div class="yr">2024</div><h3>Honda CR-V</h3><div class="row"><span class="price"><span class="en-only">Enquire</span><span class="zh-only">询价</span></span><a class="go" href="https://wa.me/8615692496753">↗</a></div></div>
-        </article>
-        <article class="ccard">
-          <div class="ph"><img src="car-gac-master.jpg" alt="GAC Master MPV"><div class="tags"><span class="tag">MPV · 7-seat</span><span class="tag"><span class="en-only">Silver</span><span class="zh-only">银色</span></span></div></div>
-          <div class="body"><div class="yr">2024</div><h3>GAC Master</h3><div class="row"><span class="price"><span class="en-only">Enquire</span><span class="zh-only">询价</span></span><a class="go" href="https://wa.me/8615692496753">↗</a></div></div>
-        </article>
-        <article class="ccard">
-          <div class="ph"><img src="car-mercedes-s.jpg" alt="Black Mercedes-Benz S-Class"><div class="tags"><span class="tag">Sedan</span><span class="tag"><span class="en-only">Black</span><span class="zh-only">黑色</span></span></div></div>
-          <div class="body"><div class="yr">2023</div><h3>Mercedes-Benz S-Class</h3><div class="row"><span class="price"><span class="en-only">Enquire</span><span class="zh-only">询价</span></span><a class="go" href="https://wa.me/8615692496753">↗</a></div></div>
-        </article>
-        <article class="ccard">
-          <div class="ph"><img src="car-gac-master.jpg" alt="GAC Master VIP"><div class="tags"><span class="tag">MPV · VIP</span><span class="tag"><span class="en-only">Chauffeur</span><span class="zh-only">商务</span></span></div></div>
-          <div class="body"><div class="yr">2024</div><h3>GAC Master · VIP</h3><div class="row"><span class="price"><span class="en-only">Enquire</span><span class="zh-only">询价</span></span><a class="go" href="https://wa.me/8615692496753">↗</a></div></div>
-        </article>
-      </div>
+      <!-- Cards are rendered from data.js (Store.getFeatured) so the owner / future admin
+           edits one data file and both the slider and cars.html update together. -->
+      <div class="track" id="track"></div>
       <div class="car-nav">
         <button onclick="slide(-1)" aria-label="Previous">‹</button>
         <button onclick="slide(1)" aria-label="Next">›</button>
       </div>
-      <div class="view-all"><a href="https://wa.me/8615692496753" class="btn btn-ghost"><span class="en-only">View all cars</span><span class="zh-only">查看全部车辆</span></a></div>
+      <div class="view-all"><a href="cars.html" class="btn btn-gold"><span class="en-only">See all cars →</span><span class="zh-only">查看全部车辆 →</span></a></div>
     </div>
   </div>
 </section>
@@ -554,6 +535,7 @@ body.zh .foot-col h4{font-family:'Noto Sans SC';letter-spacing:.05em}
 
 <a href="https://wa.me/8615692496753" class="fab" aria-label="Chat on WhatsApp">💬</a>
 
+<script src="data.js"></script>
 <script>
 // THEME (night default)
 function applyTheme(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('cce-theme',t)}catch(e){}}
@@ -597,8 +579,9 @@ function parallax(){
 }
 addEventListener('scroll',parallax,{passive:true});addEventListener('resize',parallax);parallax();
 
-// carousel
+// carousel — cards rendered from data.js (single source of truth)
 const track=document.getElementById('track');
+if(track && window.Store){track.innerHTML=Store.getFeatured().map(c=>Store.carCardHTML(c)).join('');}
 function slide(dir){const card=track.querySelector('.ccard');const w=card?card.offsetWidth+22:320;track.scrollBy({left:dir*w,behavior:'smooth'});}
 
 // FAQ

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Browse the full Cheap Cars Export inventory — SUVs, sedans, MPVs and EVs sourced in Guangzhou, China and shipped worldwide to Ghana, Africa and beyond.">
+<title>All Cars — The Collection · Cheap Cars Export</title>
+<link rel="icon" href="logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== THEME TOKENS (identical to index.html) ===== */
+:root[data-theme="dark"]{
+  --bg:#0b0b0d; --bg-2:#0f0f12; --surface:#16161a; --surface-2:#1d1d22;
+  --text:#f4f1ea; --text-soft:#a6a39c;
+  --gold:#d9b46a; --gold-soft:#ecd29a; --gold-deep:#b8924a;
+  --border:rgba(244,241,234,.10); --on-gold:#1a1408;
+  --shadow:0 30px 70px -30px rgba(0,0,0,.85);
+  --glass:rgba(18,18,21,.55); --glass-border:rgba(244,241,234,.16);
+  --nav-bg:rgba(11,11,13,.78); --chip-bg:rgba(15,15,18,.9);
+}
+:root[data-theme="light"]{
+  --bg:#f3efe6; --bg-2:#ece7da; --surface:#ffffff; --surface-2:#f1ece0;
+  --text:#161412; --text-soft:#6b6760;
+  --gold:#b8924a; --gold-soft:#caa766; --gold-deep:#9a7838;
+  --border:rgba(22,20,18,.12); --on-gold:#1a1408;
+  --shadow:0 30px 70px -30px rgba(120,95,40,.4);
+  --glass:rgba(255,255,255,.6); --glass-border:rgba(22,20,18,.14);
+  --nav-bg:rgba(243,239,230,.86); --chip-bg:rgba(255,255,255,.92);
+}
+:root{--radius:16px}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;overflow-x:hidden;transition:background .4s,color .4s}
+body.zh{font-family:'Noto Sans SC','Inter',sans-serif}
+h1,h2,h3,.display{font-family:'Sora',sans-serif;line-height:1.06;letter-spacing:-.02em}
+body.zh h1,body.zh h2,body.zh h3{font-family:'Noto Sans SC',sans-serif;letter-spacing:0}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{width:min(1200px,92vw);margin-inline:auto}
+.eyebrow{font-family:'Sora';font-weight:700;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:.6rem}
+body.zh .eyebrow{letter-spacing:.12em;font-family:'Noto Sans SC'}
+
+.zh-only{display:none}
+body.zh .en-only{display:none}
+body.zh .zh-only{display:inline}
+body.zh .zh-only.block-el{display:block}
+
+/* NAV (identical to index.html) */
+header{position:fixed;top:0;left:0;right:0;z-index:50;transition:.35s}
+header.scrolled{background:var(--nav-bg);backdrop-filter:blur(16px);box-shadow:0 1px 0 var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:1.05rem 0;gap:1rem}
+.brand{display:flex;align-items:center;gap:.6rem;font-family:'Sora';font-weight:800;font-size:1.1rem;letter-spacing:.01em}
+.brand .logo{width:34px;height:34px;border-radius:9px;object-fit:cover;box-shadow:0 8px 18px -8px var(--gold)}
+.brand b{color:var(--gold)}
+.nav-links{display:flex;gap:1.9rem;font-weight:500;font-size:.92rem}
+.nav-links a{position:relative;color:var(--text-soft);transition:.2s}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1.5px;background:var(--gold);transition:.25s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:.7rem}
+.lang{display:inline-flex;border:1px solid var(--border);border-radius:999px;overflow:hidden;font-family:'Sora';font-weight:700;font-size:.76rem;background:var(--surface)}
+.lang button{border:0;background:transparent;padding:.4rem .75rem;cursor:pointer;color:var(--text-soft);transition:.2s;font-family:inherit}
+.lang button.active{background:var(--gold);color:var(--on-gold)}
+.theme-toggle{width:37px;height:37px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:1rem;display:grid;place-items:center;transition:.25s}
+.theme-toggle:hover{border-color:var(--gold);color:var(--gold)}
+.theme-toggle .sun{display:none}
+:root[data-theme="light"] .theme-toggle .sun{display:block}
+:root[data-theme="light"] .theme-toggle .moon{display:none}
+.btn{display:inline-flex;align-items:center;gap:.5rem;font-family:'Sora';font-weight:600;padding:.8rem 1.5rem;border-radius:999px;font-size:.9rem;transition:.25s;border:0;cursor:pointer}
+body.zh .btn,body.zh .lang button,body.zh .brand{font-family:'Noto Sans SC',sans-serif}
+.btn-gold{background:var(--gold);color:var(--on-gold);box-shadow:0 16px 34px -16px var(--gold)}
+.btn-gold:hover{background:var(--gold-soft);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--text);border:1.4px solid var(--gold)}
+.btn-outline:hover{background:var(--gold);color:var(--on-gold);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--text);border:1.4px solid var(--border)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ===== PAGE HERO (compact banner) ===== */
+.page-hero{position:relative;overflow:hidden;padding:9.5rem 0 3rem;isolation:isolate;background:#08080a}
+.page-hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.page-hero-bg img{position:absolute;inset:0;width:100%;height:118%;top:-9%;object-fit:cover;object-position:50% 46%;filter:brightness(.5) contrast(1.03)}
+.page-hero-bg::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(8,8,11,.55) 0%,rgba(8,8,11,.35) 35%,rgba(8,8,11,.82) 82%,var(--bg) 100%),
+  linear-gradient(90deg,rgba(8,8,11,.7),rgba(8,8,11,.2) 60%)}
+.page-hero-inner{position:relative;z-index:1}
+.crumb{display:flex;width:fit-content;align-items:center;gap:.5rem;font-size:.82rem;color:rgba(244,241,234,.7);margin-bottom:1.1rem}
+.crumb a{color:var(--gold)}
+.crumb a:hover{text-decoration:underline}
+.page-hero h1{color:#f7f3ea;font-size:clamp(2.2rem,5.5vw,3.7rem);font-weight:800;margin:.4rem 0 0;text-shadow:0 2px 24px rgba(0,0,0,.5)}
+.page-hero h1 .gold{color:var(--gold)}
+.page-hero p.lead{color:rgba(244,241,234,.82);max-width:38rem;margin:1rem 0 0;font-size:clamp(1rem,1.2vw,1.1rem)}
+.hero-count{display:inline-flex;align-items:baseline;gap:.45rem;margin-top:1.6rem;color:rgba(244,241,234,.85);font-size:.9rem}
+.hero-count b{font-family:'Sora';font-weight:800;font-size:1.5rem;color:var(--gold)}
+
+/* ===== FILTER BAR ===== */
+.filterwrap{position:sticky;top:64px;z-index:30;background:var(--bg);border-bottom:1px solid var(--border);padding:1rem 0;transition:background .4s}
+.filterbar{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.fchip{font-family:'Sora';font-weight:600;font-size:.84rem;padding:.55rem 1.1rem;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text-soft);cursor:pointer;transition:.22s;white-space:nowrap}
+body.zh .fchip{font-family:'Noto Sans SC'}
+.fchip:hover{color:var(--text);border-color:var(--gold)}
+.fchip.active{background:var(--gold);color:var(--on-gold);border-color:var(--gold);box-shadow:0 12px 26px -14px var(--gold)}
+.fchip .n{opacity:.65;font-weight:700;margin-left:.15rem}
+.fchip.active .n{opacity:.8}
+
+/* ===== GRID + CARD (card identical to index.html .ccard) ===== */
+.collection{padding:2.6rem 0 5rem}
+.cars-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
+.ccard{background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:.35s;opacity:0;transform:translateY(26px);animation:rise .6s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.ccard:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:var(--gold)}
+.ccard .ph{position:relative;height:210px;overflow:hidden}
+.ccard .ph img{width:100%;height:100%;object-fit:cover;transition:.6s}
+.ccard:hover .ph img{transform:scale(1.08)}
+.ccard .tags{position:absolute;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;gap:.4rem}
+.ccard .tag{background:var(--chip-bg);backdrop-filter:blur(6px);color:var(--text);font-size:.68rem;font-weight:600;padding:.3rem .6rem;border-radius:999px;border:1px solid var(--border)}
+.ccard .body{padding:1.1rem 1.2rem 1.3rem}
+.ccard .yr{font-size:.72rem;color:var(--gold);font-weight:700;letter-spacing:.06em}
+.ccard h3{font-size:1.12rem;margin:.2rem 0 .7rem}
+.ccard .row{display:flex;align-items:center;justify-content:space-between}
+.ccard .price{font-family:'Sora';font-weight:700;font-size:.95rem;color:var(--text)}
+.ccard .go{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;color:var(--gold);transition:.25s}
+.ccard .go:hover{background:var(--gold);color:var(--on-gold)}
+
+/* empty state */
+.empty{text-align:center;padding:4rem 1rem;color:var(--text-soft)}
+.empty .ico{font-size:2.4rem;margin-bottom:.6rem}
+
+/* closing CTA */
+.foot-cta{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:clamp(2rem,4vw,3rem);text-align:center;margin-top:3.5rem}
+.foot-cta h2{font-size:clamp(1.6rem,3.4vw,2.3rem);font-weight:800;margin-bottom:.5rem}
+.foot-cta p{color:var(--text-soft);max-width:34rem;margin:0 auto 1.5rem}
+
+/* FOOTER (identical to index.html) */
+footer{padding:3.5rem 0 2.5rem;border-top:1px solid var(--border)}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+.foot-grid p{color:var(--text-soft);font-size:.93rem;max-width:24rem;margin-top:1rem}
+.foot-col h4{font-family:'Sora';font-size:.76rem;text-transform:uppercase;letter-spacing:.16em;color:var(--gold);margin-bottom:.9rem}
+body.zh .foot-col h4{font-family:'Noto Sans SC';letter-spacing:.05em}
+.foot-col a{display:block;color:var(--text-soft);font-size:.92rem;margin-bottom:.55rem;transition:.2s}
+.foot-col a:hover{color:var(--text)}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;font-size:.84rem;color:var(--text-soft);flex-wrap:wrap;gap:.6rem}
+
+.fab{position:fixed;right:20px;bottom:20px;z-index:60;background:#25d366;color:#fff;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:1.55rem;box-shadow:0 16px 32px -12px rgba(37,211,102,.6);transition:.3s}
+.fab:hover{transform:scale(1.08)}
+.progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:70;background:linear-gradient(90deg,var(--gold-deep),var(--gold-soft))}
+
+@media(max-width:900px){
+  .foot-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .filterwrap{top:56px}
+}
+@media(max-width:560px){
+  .page-hero{padding-top:8rem}
+  .fchip{font-size:.78rem;padding:.5rem .9rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .ccard{opacity:1;transform:none;animation:none}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header id="header">
+  <div class="wrap nav">
+    <a href="index.html#top" class="brand"><img class="logo" src="logo.png" alt="Cheap Cars Export logo">Cheap<b>Cars</b>Export</a>
+    <nav class="nav-links">
+      <a href="cars.html"><span class="en-only">Inventory</span><span class="zh-only">车源</span></a>
+      <a href="index.html#services"><span class="en-only">Services</span><span class="zh-only">服务</span></a>
+      <a href="index.html#why"><span class="en-only">Why us</span><span class="zh-only">为什么选我们</span></a>
+      <a href="index.html#faq"><span class="en-only">FAQ</span><span class="zh-only">常见问题</span></a>
+      <a href="index.html#contact"><span class="en-only">Contact</span><span class="zh-only">联系</span></a>
+    </nav>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode"><span class="moon">☾</span><span class="sun">☀</span></button>
+      <div class="lang">
+        <button id="lang-en" class="active" onclick="setLang('en')">EN</button>
+        <button id="lang-zh" onclick="setLang('zh')">中文</button>
+      </div>
+      <a href="index.html#contact" class="btn btn-gold nav-cta"><span class="en-only">Get a quote</span><span class="zh-only">获取报价</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"><img src="car-hero.jpg" alt="Premium export car"></div>
+  <div class="wrap page-hero-inner">
+    <span class="crumb"><a href="index.html#top"><span class="en-only">Home</span><span class="zh-only">首页</span></a> <span>/</span> <span class="en-only">Inventory</span><span class="zh-only">车源</span></span>
+    <span class="eyebrow"><span class="en-only">The full collection</span><span class="zh-only">全部车源</span></span>
+    <h1>
+      <span class="en-only">Every car, <span class="gold">ready to ship.</span></span>
+      <span class="zh-only block-el">每一台车，<span class="gold">即刻发运。</span></span>
+    </h1>
+    <p class="lead"><span class="en-only">Browse our current stock sourced across China — SUVs, sedans, MPVs and EVs, inspected and prepared for export. Tap any car to ask about live availability and a landed price.</span><span class="zh-only">浏览我们目前在全中国寻源的现货 —— SUV、轿车、商务车与电动车，均已验车并备妥出口。点击任意车辆即可咨询现货与到岸价。</span></p>
+    <span class="hero-count"><b id="carCount">0</b> <span class="en-only">cars available now</span><span class="zh-only">辆现车在售</span></span>
+  </div>
+</section>
+
+<!-- FILTERS -->
+<div class="filterwrap">
+  <div class="wrap">
+    <div class="filterbar" id="filterbar"></div>
+  </div>
+</div>
+
+<!-- COLLECTION GRID -->
+<section class="collection">
+  <div class="wrap">
+    <div class="cars-grid" id="carsGrid"></div>
+    <div class="empty" id="emptyState" style="display:none">
+      <div class="ico">🔍</div>
+      <p><span class="en-only">No cars in this category right now. Message us on WhatsApp and we'll source it.</span><span class="zh-only">该类别暂无车辆。欢迎通过 WhatsApp 联系我们，我们将为您寻源。</span></p>
+    </div>
+
+    <div class="foot-cta">
+      <h2><span class="en-only">Can't find the model you want?</span><span class="zh-only">没找到想要的车型？</span></h2>
+      <p><span class="en-only">Tell us the make, budget and destination — we source almost any car in China and ship it to your port.</span><span class="zh-only">告诉我们品牌、预算与目的地 —— 我们能在中国寻源几乎任何车辆并运往您的港口。</span></p>
+      <a href="index.html#contact" class="btn btn-gold"><span class="en-only">Get a quote ↗</span><span class="zh-only">获取报价 ↗</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="index.html#top" class="brand"><img class="logo" src="logo.png" alt="Cheap Cars Export logo">Cheap<b>Cars</b>Export</a>
+        <p><span class="en-only">Crafting effortless car export since Guangzhou — sourcing, inspection and worldwide shipping of new and used vehicles at honest prices.</span><span class="zh-only">源自广州的省心汽车出口 —— 以诚实价格寻源、验车并向全球发运全新及二手车辆。</span></p>
+      </div>
+      <div class="foot-col">
+        <h4><span class="en-only">Explore</span><span class="zh-only">导航</span></h4>
+        <a href="cars.html"><span class="en-only">Inventory</span><span class="zh-only">车源</span></a>
+        <a href="index.html#services"><span class="en-only">Services</span><span class="zh-only">服务</span></a>
+        <a href="index.html#why"><span class="en-only">Why us</span><span class="zh-only">为什么选我们</span></a>
+        <a href="index.html#faq"><span class="en-only">FAQ</span><span class="zh-only">常见问题</span></a>
+      </div>
+      <div class="foot-col">
+        <h4><span class="en-only">Connect</span><span class="zh-only">联系</span></h4>
+        <a href="https://wa.me/8615692496753">WhatsApp</a>
+        <a href="https://instagram.com/cheap_exports">Instagram</a>
+        <a href="index.html#contact"><span class="en-only">Get a quote</span><span class="zh-only">获取报价</span></a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Cheap Cars Export · <span class="en-only">Guangzhou, China</span><span class="zh-only">中国广州</span></span>
+      <span><span class="en-only">Brand names belong to their respective owners.</span><span class="zh-only">品牌名称归各自所有者所有。</span></span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/8615692496753" class="fab" aria-label="Chat on WhatsApp">💬</a>
+
+<script src="data.js"></script>
+<script>
+// THEME (shared behaviour with index.html)
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('cce-theme',t)}catch(e){}}
+function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');}
+try{const st=localStorage.getItem('cce-theme');if(st)applyTheme(st);}catch(e){}
+
+// LANGUAGE
+function setLang(l){
+  document.body.classList.toggle('zh',l==='zh');
+  document.documentElement.lang=l==='zh'?'zh':'en';
+  document.getElementById('lang-en').classList.toggle('active',l==='en');
+  document.getElementById('lang-zh').classList.toggle('active',l==='zh');
+  try{localStorage.setItem('cce-lang',l)}catch(e){}
+}
+
+// scroll progress + header
+const header=document.getElementById('header'),progress=document.getElementById('progress');
+function onScroll(){const s=scrollY;header.classList.toggle('scrolled',s>30);const h=document.documentElement.scrollHeight-innerHeight;progress.style.width=(h>0?(s/h*100):0)+'%';}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+// ===== RENDER FROM Store (data.js) =====
+const grid=document.getElementById('carsGrid');
+const emptyState=document.getElementById('emptyState');
+const filterbar=document.getElementById('filterbar');
+let activeCat='all';
+
+function countFor(catId){
+  return catId==='all' ? Store.getCars().length : Store.getCarsByCategory(catId).length;
+}
+
+function renderFilters(){
+  filterbar.innerHTML = Store.getCategories().map(c=>{
+    const n=countFor(c.id);
+    return `<button class="fchip${c.id===activeCat?' active':''}" data-cat="${c.id}">
+      <span class="en-only">${c.label.en}</span><span class="zh-only">${c.label.zh}</span><span class="n">${n}</span>
+    </button>`;
+  }).join('');
+  filterbar.querySelectorAll('.fchip').forEach(btn=>{
+    btn.addEventListener('click',()=>{activeCat=btn.dataset.cat;renderFilters();renderGrid();});
+  });
+}
+
+function renderGrid(){
+  const cars=Store.getCarsByCategory(activeCat);
+  if(!cars.length){grid.innerHTML='';emptyState.style.display='block';return;}
+  emptyState.style.display='none';
+  // stagger the rise animation a touch for a premium feel
+  grid.innerHTML=cars.map((c,i)=>Store.carCardHTML(c).replace('<article class="ccard"',`<article class="ccard" style="animation-delay:${Math.min(i*45,360)}ms"`)).join('');
+}
+
+// initial paint
+document.getElementById('carCount').textContent=Store.getCars().length;
+renderFilters();
+renderGrid();
+
+// apply saved language AFTER cards exist so EN/中文 spans toggle correctly
+try{const sl=localStorage.getItem('cce-lang');if(sl==='zh')setLang('zh');}catch(e){}
+</script>
+</body>
+</html>
