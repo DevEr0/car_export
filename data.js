@@ -26,7 +26,10 @@ window.SITE_DATA = {
     whatsapp: "8615692496753",                    // digits only, used in wa.me links
     whatsappDisplay: "+86 156 9249 6753",
     instagram: "cheap_exports",
-    location: { en: "Guangzhou, China", zh: "中国广州" }
+    location: { en: "Guangzhou, China", zh: "中国广州" },
+    /* Admin password gate. hash = SHA-256 of the password.
+       Default password is "changeme" — CHANGE IT in the admin's Publish tab. */
+    admin: { gate: true, hash: "057ba03d6c44104863dc7361fe4578965d1887360f90a0895882e58a6248fc86" }
   },
 
   /* ---- Editable homepage text (rendered by index.html applyContent) ----
