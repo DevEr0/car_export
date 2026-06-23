@@ -18,6 +18,7 @@
    photo in /img/cars/ (or anywhere) and set `image` to that path.
    ===================================================================== */
 
+/* __DATA_START__  (admin.html rewrites everything between these markers) */
 window.SITE_DATA = {
 
   /* ---- Global site config (also admin-editable) ---- */
@@ -26,6 +27,56 @@ window.SITE_DATA = {
     whatsappDisplay: "+86 156 9249 6753",
     instagram: "cheap_exports",
     location: { en: "Guangzhou, China", zh: "中国广州" }
+  },
+
+  /* ---- Editable homepage text (rendered by index.html applyContent) ----
+     Use \n inside a title to force a line break. `accent` is the gold word. */
+  content: {
+    hero: {
+      eyebrow: { en: "Guangzhou, China · Worldwide export", zh: "中国广州 · 全球出口" },
+      title:   { en: "Drive the Legacy\nof ", zh: "传承价值，\n" },
+      accent:  { en: "Value.", zh: "驰骋全球。" },
+      lead:    { en: "We source, inspect and ship new and used cars from across China — SUVs, MPVs, EVs and luxury sedans — to Ghana, Africa and beyond at honest, competitive prices.", zh: "我们在全中国寻源、验车并发运全新及二手车辆 —— SUV、MPV、电动车与豪华轿车，以诚实公道的价格运往加纳、非洲及世界各地。" },
+      tags: [
+        { en: "Worldwide shipping", zh: "全球运输" },
+        { en: "Free inspection",   zh: "免费验车" },
+        { en: "New & used",        zh: "全新及二手" }
+      ]
+    },
+    inventory: {
+      eyebrow: { en: "Recent stock", zh: "最新车源" },
+      title:   { en: "Explore our collection", zh: "探索我们的车源" },
+      intro:   { en: "A handpicked look at cars we've recently sourced and prepared for export. Ask on WhatsApp for live availability and a landed price.", zh: "精选我们近期寻源并备妥出口的车辆。欢迎在 WhatsApp 询问现货与到岸价。" }
+    },
+    services: {
+      eyebrow: { en: "What we do", zh: "我们的服务" },
+      title:   { en: "From a Chinese showroom to your port", zh: "从中国展厅到您的港口" },
+      intro:   { en: "One contact handles the entire chain, so you buy with confidence from anywhere in the world.", zh: "一个联系人负责全部环节，让您在世界任何角落都能放心购车。" }
+    },
+    why: {
+      eyebrow: { en: "Why buyers trust us", zh: "买家为何信任我们" },
+      title:   { en: "Why choose us for\nyour ", zh: "为何选择我们\n购买" },
+      accent:  { en: "next car", zh: "下一台车" },
+      intro:   { en: "A Guangzhou team that treats your money like our own — transparent, fast, and on the ground where the cars are.", zh: "一支把您的钱当自己钱看的广州团队 —— 透明、快速，且就在车源所在地。" }
+    },
+    brands: {
+      eyebrow: { en: "Brands we export", zh: "我们出口的品牌" },
+      title:   { en: "From everyday to extraordinary", zh: "从日常到非凡" }
+    },
+    faq: {
+      eyebrow: { en: "Good to know", zh: "您需要了解" },
+      title:   { en: "Your questions, perfectly answered", zh: "您的疑问，逐一解答" }
+    },
+    cta: {
+      eyebrow: { en: "Ready when you are", zh: "随时为您效劳" },
+      title:   { en: "Drive beyond expectations", zh: "超越期待，自在驰骋" },
+      intro:   { en: "Let our team guide you to the right car at the right price, sourced in China and delivered to your door.", zh: "让我们的团队为您找到合适的车与合适的价格，中国寻源，直送到家。" }
+    },
+    contact: {
+      eyebrow: { en: "Get a quote", zh: "获取报价" },
+      title:   { en: "Import your next car", zh: "进口您的下一台车" },
+      intro:   { en: "Send the model you want and where it's headed — we usually reply on WhatsApp within the hour.", zh: "把您想要的车型与目的地发给我们 —— 通常一小时内通过 WhatsApp 回复。" }
+    }
   },
 
   /* ---- Filter categories shown on the inventory page ---- */
@@ -215,6 +266,7 @@ window.SITE_DATA = {
     }
   ]
 };
+/* __DATA_END__ */
 
 
 /* =====================================================================
@@ -237,6 +289,8 @@ window.Store = (function () {
   }
   return {
     getConfig:     () => data().config,
+    getContent:    () => data().content,
+    getEffective:  () => data(),            // full data object (config, content, categories, cars)
     getCategories: () => data().categories,
     getCars:       () => data().cars,
     getFeatured:   () => data().cars.filter(c => c.featured),

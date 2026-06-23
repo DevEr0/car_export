@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin · Cheap Cars Export</title>
+<link rel="icon" href="logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root[data-theme="dark"]{
+  --bg:#0b0b0d; --bg-2:#0f0f12; --surface:#16161a; --surface-2:#1d1d22;
+  --text:#f4f1ea; --text-soft:#a6a39c;
+  --gold:#d9b46a; --gold-soft:#ecd29a; --gold-deep:#b8924a;
+  --border:rgba(244,241,234,.10); --on-gold:#1a1408;
+  --shadow:0 30px 70px -30px rgba(0,0,0,.85);
+  --danger:#e0746a; --ok:#7bbf86;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.55;padding-bottom:88px}
+h1,h2,h3,.display{font-family:'Sora',sans-serif;letter-spacing:-.01em}
+a{color:var(--gold)}
+.wrap{width:min(1080px,94vw);margin-inline:auto}
+.eyebrow{font-family:'Sora';font-weight:700;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+
+/* header */
+header{position:sticky;top:0;z-index:40;background:rgba(11,11,13,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.head-in{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem 0}
+.brand{display:flex;align-items:center;gap:.6rem;font-family:'Sora';font-weight:800}
+.brand img{width:32px;height:32px;border-radius:8px}
+.brand b{color:var(--gold)}
+.brand .tagadmin{font-size:.62rem;letter-spacing:.2em;color:var(--text-soft);border:1px solid var(--border);padding:.15rem .45rem;border-radius:6px;margin-left:.3rem}
+.pill{font-family:'Sora';font-weight:600;font-size:.72rem;padding:.4rem .8rem;border-radius:999px;border:1px solid var(--border);color:var(--text-soft);white-space:nowrap}
+.pill.dirty{color:var(--gold);border-color:var(--gold)}
+.pill.saved{color:var(--ok);border-color:rgba(123,191,134,.5)}
+
+/* help banner */
+.note{background:linear-gradient(180deg,var(--surface),var(--bg-2));border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.3rem;margin:1.4rem 0}
+.note h3{font-size:1rem;margin-bottom:.4rem}
+.note p{color:var(--text-soft);font-size:.9rem;margin:.25rem 0}
+.note b{color:var(--text)}
+
+/* tabs */
+.tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin:1.4rem 0}
+.tab{font-family:'Sora';font-weight:600;font-size:.85rem;padding:.55rem 1rem;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text-soft);cursor:pointer;transition:.2s}
+.tab:hover{color:var(--text);border-color:var(--gold)}
+.tab.active{background:var(--gold);color:var(--on-gold);border-color:var(--gold)}
+.panel{display:none;animation:fade .25s ease}
+.panel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* generic blocks */
+.section-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.2rem 1.3rem;margin-bottom:1.1rem}
+.section-card>h2{font-size:1.05rem;margin-bottom:.2rem}
+.section-card>.sub{color:var(--text-soft);font-size:.84rem;margin-bottom:1rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem 1rem}
+@media(max-width:640px){.grid2{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.2rem}
+.field label{font-size:.74rem;font-weight:600;color:var(--text-soft);letter-spacing:.02em}
+.field .lng{display:inline-block;font-size:.6rem;font-weight:700;color:var(--gold);border:1px solid var(--border);border-radius:4px;padding:0 .3rem;margin-left:.3rem}
+input,select,textarea{width:100%;padding:.6rem .75rem;border-radius:10px;border:1px solid var(--border);background:var(--bg-2);color:var(--text);font-family:inherit;font-size:.9rem}
+textarea{resize:vertical;min-height:64px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:.45rem;font-family:'Sora';font-weight:600;padding:.6rem 1.1rem;border-radius:999px;font-size:.85rem;border:0;cursor:pointer;transition:.2s}
+.btn-gold{background:var(--gold);color:var(--on-gold)}
+.btn-gold:hover{background:var(--gold-soft)}
+.btn-ghost{background:transparent;color:var(--text);border:1.3px solid var(--border)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-danger{background:transparent;color:var(--danger);border:1.3px solid rgba(224,116,106,.4)}
+.btn-danger:hover{background:var(--danger);color:#fff;border-color:var(--danger)}
+.btn-sm{padding:.4rem .7rem;font-size:.78rem}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+
+/* car list */
+.car-row{display:flex;align-items:center;gap:.9rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:.7rem .8rem;margin-bottom:.7rem;transition:.2s}
+.car-row:hover{border-color:rgba(217,180,106,.4)}
+.car-row .thumb{width:74px;height:50px;border-radius:8px;object-fit:cover;background:var(--bg-2);flex:none;border:1px solid var(--border)}
+.car-row .meta{flex:1;min-width:0}
+.car-row .meta .nm{font-weight:600;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.car-row .meta .mm{font-size:.76rem;color:var(--text-soft)}
+.badge{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.04em;padding:.12rem .45rem;border-radius:999px;border:1px solid var(--border);color:var(--text-soft);margin-left:.3rem}
+.badge.feat{color:var(--gold);border-color:rgba(217,180,106,.5)}
+.car-row .acts{display:flex;align-items:center;gap:.35rem;flex:none}
+.iconbtn{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--bg-2);color:var(--text);cursor:pointer;font-size:.95rem;display:grid;place-items:center;transition:.2s}
+.iconbtn:hover{border-color:var(--gold);color:var(--gold)}
+.iconbtn.del:hover{border-color:var(--danger);color:var(--danger)}
+.editor{background:var(--bg-2);border:1px solid var(--gold);border-radius:14px;padding:1.1rem;margin:-.2rem 0 .9rem}
+.editor .imgrow{display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap}
+.editor .preview{width:160px;height:108px;border-radius:10px;object-fit:cover;background:var(--surface);border:1px solid var(--border)}
+.tagline{display:flex;gap:.5rem;align-items:end;margin-bottom:.5rem}
+.tagline .field{flex:1;margin:0}
+
+/* publish */
+.pubgrid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:760px){.pubgrid{grid-template-columns:1fr}}
+.log{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;background:#000;border:1px solid var(--border);border-radius:10px;padding:.7rem .8rem;color:#bcd;white-space:pre-wrap;max-height:200px;overflow:auto;margin-top:.6rem}
+.step{display:flex;gap:.6rem;margin:.5rem 0;font-size:.88rem;color:var(--text-soft)}
+.step b{color:var(--text)}
+.step .n{flex:none;width:22px;height:22px;border-radius:50%;background:var(--gold);color:var(--on-gold);font-weight:800;font-size:.72rem;display:grid;place-items:center}
+
+/* sticky action bar */
+.actionbar{position:fixed;bottom:0;left:0;right:0;z-index:45;background:rgba(11,11,13,.92);backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:.7rem 0}
+.actionbar .in{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;justify-content:flex-end}
+.actionbar .status{margin-right:auto;font-size:.82rem;color:var(--text-soft)}
+.hidden{display:none!important}
+.warn{color:var(--danger)}
+.smallnote{font-size:.76rem;color:var(--text-soft);margin-top:.4rem}
+.add-wrap{display:flex;justify-content:space-between;align-items:center;margin:.4rem 0 1rem;gap:.6rem;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap head-in">
+    <div class="brand"><img src="logo.png" alt="logo">Cheap<b>Cars</b>Export<span class="tagadmin">ADMIN</span></div>
+    <div id="statusPill" class="pill">Loading…</div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="note">
+    <h3>How this works <span style="font-weight:400;color:var(--text-soft);font-size:.85rem">— read once</span></h3>
+    <p>Edit anything below, then choose how to save:</p>
+    <p>① <b>Preview on this device</b> — see your changes on the live site immediately, but <b>only in this browser</b>. Good for checking before going public.</p>
+    <p>② <b>Publish</b> — makes changes visible to <b>everyone</b>. Because this is a static GitHub Pages site, publishing means saving the <b>data.js</b> file back to your repository — either by <b>downloading it</b> and uploading to GitHub, or by <b>committing directly</b> with a GitHub token (set up once). Both are on the <b>Publish</b> tab.</p>
+  </div>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="cars">🚗 Cars</button>
+    <button class="tab" data-tab="text">📝 Homepage text</button>
+    <button class="tab" data-tab="contact">📞 Contact &amp; social</button>
+    <button class="tab" data-tab="cats">🏷️ Categories</button>
+    <button class="tab" data-tab="publish">🚀 Publish</button>
+  </div>
+
+  <!-- CARS -->
+  <section class="panel active" id="panel-cars">
+    <div class="add-wrap">
+      <div><span class="eyebrow">Inventory</span><div class="smallnote">Drag isn't needed — use ▲▼ to reorder. The first cars marked ★ show in the homepage slider.</div></div>
+      <button class="btn btn-gold" id="addCar">+ Add car</button>
+    </div>
+    <div id="carList"></div>
+  </section>
+
+  <!-- HOMEPAGE TEXT -->
+  <section class="panel" id="panel-text">
+    <div id="textForm"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="panel" id="panel-contact">
+    <div class="section-card">
+      <h2>Contact &amp; social</h2>
+      <p class="sub">These update the WhatsApp button, every enquiry link, and the contact details across the whole site.</p>
+      <div class="grid2">
+        <div class="field"><label>WhatsApp number <span class="lng">digits only</span></label><input data-path="config.whatsapp" placeholder="8615692496753"></div>
+        <div class="field"><label>WhatsApp shown as</label><input data-path="config.whatsappDisplay" placeholder="+86 156 9249 6753"></div>
+        <div class="field"><label>Instagram handle <span class="lng">no @</span></label><input data-path="config.instagram" placeholder="cheap_exports"></div>
+        <div class="field"></div>
+        <div class="field"><label>Location <span class="lng">EN</span></label><input data-path="config.location.en" placeholder="Guangzhou, China"></div>
+        <div class="field"><label>Location <span class="lng">中文</span></label><input data-path="config.location.zh" placeholder="中国广州"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="panel" id="panel-cats">
+    <div class="section-card">
+      <h2>Categories</h2>
+      <p class="sub">The filter buttons on the “All cars” page. Each car is assigned one category by its <b>id</b>.</p>
+      <div id="catList"></div>
+      <button class="btn btn-ghost btn-sm" id="addCat">+ Add category</button>
+    </div>
+  </section>
+
+  <!-- PUBLISH -->
+  <section class="panel" id="panel-publish">
+    <div class="pubgrid">
+      <div class="section-card">
+        <h2>Option A — Download &amp; upload</h2>
+        <p class="sub">Easiest. No setup. Works for anyone.</p>
+        <div class="step"><span class="n">1</span><span>Click <b>Download data.js</b>.</span></div>
+        <div class="step"><span class="n">2</span><span>Go to your repo on github.com → open <b>data.js</b> → click the ✏️ pencil.</span></div>
+        <div class="step"><span class="n">3</span><span>Select all, paste the new file, and <b>Commit changes</b>.</span></div>
+        <div class="step"><span class="n">4</span><span>GitHub Pages republishes in ~1 minute. Done — live for everyone.</span></div>
+        <button class="btn btn-gold" id="dlBtn" style="margin-top:.6rem">⬇ Download data.js</button>
+      </div>
+
+      <div class="section-card">
+        <h2>Option B — Commit directly</h2>
+        <p class="sub">One-time setup, then publishing is one click forever.</p>
+        <div class="grid2">
+          <div class="field"><label>GitHub owner</label><input id="ghOwner" placeholder="DevEr0"></div>
+          <div class="field"><label>Repository</label><input id="ghRepo" placeholder="car_export"></div>
+          <div class="field"><label>Branch</label><input id="ghBranch" placeholder="main"></div>
+          <div class="field"><label>File path</label><input id="ghPath" placeholder="data.js"></div>
+        </div>
+        <div class="field"><label>Personal access token <span class="lng">kept on this device only</span></label><input id="ghToken" type="password" placeholder="github_pat_…"></div>
+        <label style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--text-soft);margin:.3rem 0">
+          <input type="checkbox" id="ghRemember" style="width:auto"> Remember token on this device
+        </label>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.3rem">
+          <button class="btn btn-gold" id="commitBtn">🚀 Publish to GitHub</button>
+          <button class="btn btn-ghost btn-sm" id="forgetToken">Forget token</button>
+        </div>
+        <p class="smallnote">Create a token at github.com → Settings → Developer settings → <b>Fine-grained tokens</b>, scoped to this repo with <b>Contents: Read &amp; write</b>. Anyone with this token can edit the repo, so keep it private.</p>
+        <div class="log hidden" id="ghLog"></div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h2>Local draft</h2>
+      <p class="sub">“Preview on this device” saves a draft in this browser. It never affects other visitors until you publish.</p>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+        <button class="btn btn-ghost btn-sm" id="previewBtn2">👁 Preview on this device</button>
+        <button class="btn btn-danger btn-sm" id="resetDraft">↺ Discard local draft</button>
+        <a class="btn btn-ghost btn-sm" href="index.html" target="_blank">↗ Open site</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- sticky actions -->
+<div class="actionbar">
+  <div class="wrap in">
+    <div class="status" id="barStatus">Ready</div>
+    <button class="btn btn-ghost" id="previewBtn">👁 Preview on this device</button>
+    <button class="btn btn-ghost" id="dlBtn2">⬇ Download data.js</button>
+    <button class="btn btn-gold" id="publishJump">🚀 Publish…</button>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script>
+/* ============ STATE ============ */
+let DATA = JSON.parse(JSON.stringify(window.Store ? Store.getEffective() : window.SITE_DATA));
+const hasDraft = (()=>{try{return !!localStorage.getItem('cce-admin-data');}catch(e){return false;}})();
+let state = hasDraft ? 'draft' : 'clean';   // clean | dirty | draft | published
+
+function setStatus(s){
+  state=s;
+  const pill=document.getElementById('statusPill');
+  const bar=document.getElementById('barStatus');
+  const map={
+    clean:['Loaded published content','pill','Showing what is currently live.'],
+    dirty:['Unsaved changes','pill dirty','You have edits that are not saved anywhere yet.'],
+    draft:['Draft on this device','pill dirty','Visible only in your browser. Publish to go live for everyone.'],
+    published:['Published ✓','pill saved','Live for everyone (GitHub Pages may take ~1 min).']
+  };
+  const [t,cls,msg]=map[s]||map.clean;
+  pill.textContent=t; pill.className=cls;
+  bar.textContent=msg;
+}
+function markDirty(){ if(state!=='dirty'){ setStatus('dirty'); } }
+
+/* ============ PATH HELPERS ============ */
+function getByPath(o,p){return p.split('.').reduce((a,k)=>a==null?a:a[/^\d+$/.test(k)?+k:k],o);}
+function setByPath(o,p,v){const ks=p.split('.');let a=o;for(let i=0;i<ks.length-1;i++){const k=ks[i];a=a[/^\d+$/.test(k)?+k:k];}const last=ks[ks.length-1];a[/^\d+$/.test(last)?+last:last]=v;}
+
+document.addEventListener('input',e=>{
+  const el=e.target; if(!el.dataset||!el.dataset.path) return;
+  let v = el.type==='checkbox' ? el.checked : el.value;
+  if(el.dataset.num!==undefined) v = v===''? '' : Number(v);
+  setByPath(DATA, el.dataset.path, v);
+  markDirty();
+  if(el.dataset.live){ /* update small live bits like car row name */ liveTouch(el); }
+});
+function liveTouch(el){
+  const row=el.closest('[data-carblock]');
+  if(row){ const i=+row.dataset.carblock; const nm=row.querySelector('.nm'); if(nm) nm.textContent=(DATA.cars[i].name.en||'(no name)'); }
+}
+
+/* ============ TABS ============ */
+document.getElementById('tabs').addEventListener('click',e=>{
+  const b=e.target.closest('.tab'); if(!b) return;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t===b));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+b.dataset.tab));
+});
+document.getElementById('publishJump').addEventListener('click',()=>{
+  document.querySelector('.tab[data-tab="publish"]').click();
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* ============ CARS ============ */
+let openCar = null;
+const carList = document.getElementById('carList');
+
+function catOptions(sel){
+  return DATA.categories.filter(c=>c.id!=='all').map(c=>
+    `<option value="${c.id}" ${c.id===sel?'selected':''}>${esc(c.label.en)} (${c.id})</option>`).join('');
+}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
+
+function renderCars(){
+  carList.innerHTML = DATA.cars.map((car,i)=>{
+    const img = car.image || '';
+    const open = openCar===i;
+    return `
+    <div data-carblock="${i}">
+      <div class="car-row">
+        <img class="thumb" src="${esc(img)}" alt="" onerror="this.style.opacity=.25">
+        <div class="meta">
+          <div class="nm">${esc(car.name.en||'(no name)')}${car.featured?'<span class="badge feat">★ slider</span>':''}<span class="badge">${esc(car.category||'—')}</span></div>
+          <div class="mm">${esc(String(car.year||''))} · ${esc((car.price&&car.price.en)||'')}</div>
+        </div>
+        <div class="acts">
+          <button class="iconbtn" title="Move up"  data-act="up"   data-i="${i}">▲</button>
+          <button class="iconbtn" title="Move down" data-act="down" data-i="${i}">▼</button>
+          <button class="iconbtn" title="Edit"      data-act="edit" data-i="${i}">✎</button>
+          <button class="iconbtn del" title="Delete" data-act="del"  data-i="${i}">🗑</button>
+        </div>
+      </div>
+      ${open?carEditor(car,i):''}
+    </div>`;
+  }).join('');
+}
+
+function carEditor(car,i){
+  const tags=(car.tags||[]).map((t,j)=>`
+    <div class="tagline">
+      <div class="field"><label>Tag ${j+1} <span class="lng">EN</span></label><input data-path="cars.${i}.tags.${j}.en" value="${esc(t.en)}"></div>
+      <div class="field"><label>&nbsp;<span class="lng">中文</span></label><input data-path="cars.${i}.tags.${j}.zh" value="${esc(t.zh)}"></div>
+      <button class="iconbtn del" title="Remove tag" data-act="deltag" data-i="${i}" data-j="${j}">✕</button>
+    </div>`).join('');
+  return `<div class="editor">
+    <div class="imgrow">
+      <img class="preview" id="prev-${i}" src="${esc(car.image||'')}" alt="" onerror="this.style.opacity=.25">
+      <div style="flex:1;min-width:220px">
+        <div class="field"><label>Photo — upload from device <span class="lng">auto-resized</span></label>
+          <input type="file" accept="image/*" data-act="img" data-i="${i}"></div>
+        <div class="field"><label>…or image path / URL</label>
+          <input data-path="cars.${i}.image" value="${esc(car.image||'')}" placeholder="car-photo.jpg or https://…"></div>
+        <p class="smallnote">Uploaded photos are embedded in data.js (kept small). For many cars, prefer dropping files in the repo and using a path.</p>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:.7rem">
+      <div class="field"><label>Name <span class="lng">EN</span></label><input data-path="cars.${i}.name.en" data-live="1" value="${esc(car.name.en)}"></div>
+      <div class="field"><label>Name <span class="lng">中文</span></label><input data-path="cars.${i}.name.zh" value="${esc(car.name.zh)}"></div>
+      <div class="field"><label>Year</label><input type="number" data-path="cars.${i}.year" data-num="1" value="${esc(String(car.year||''))}"></div>
+      <div class="field"><label>Category</label><select data-path="cars.${i}.category" data-rerender="1">${catOptions(car.category)}</select></div>
+      <div class="field"><label>Price text <span class="lng">EN</span></label><input data-path="cars.${i}.price.en" value="${esc(car.price&&car.price.en)}"></div>
+      <div class="field"><label>Price text <span class="lng">中文</span></label><input data-path="cars.${i}.price.zh" value="${esc(car.price&&car.price.zh)}"></div>
+      <div class="field"><label>Photo alt text</label><input data-path="cars.${i}.alt" value="${esc(car.alt||'')}"></div>
+      <div class="field"><label>&nbsp;</label><label style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--text);padding:.5rem 0">
+        <input type="checkbox" data-path="cars.${i}.featured" data-rerender="1" style="width:auto" ${car.featured?'checked':''}> Show in homepage slider ★</label></div>
+    </div>
+    <div style="margin-top:.4rem">${tags}
+      <button class="btn btn-ghost btn-sm" data-act="addtag" data-i="${i}" ${ (car.tags||[]).length>=3?'disabled':''}>+ Add tag</button>
+    </div>
+    <div style="margin-top:.8rem;display:flex;justify-content:flex-end"><button class="btn btn-gold btn-sm" data-act="closeedit">Done</button></div>
+  </div>`;
+}
+
+carList.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]'); if(!b) return;
+  const i=+b.dataset.i, act=b.dataset.act;
+  if(act==='edit'){ openCar = (openCar===i?null:i); renderCars(); }
+  else if(act==='closeedit'){ openCar=null; renderCars(); }
+  else if(act==='del'){ if(confirm('Delete "'+(DATA.cars[i].name.en||'this car')+'"?')){ DATA.cars.splice(i,1); if(openCar===i)openCar=null; markDirty(); renderCars(); } }
+  else if(act==='up'  && i>0){ [DATA.cars[i-1],DATA.cars[i]]=[DATA.cars[i],DATA.cars[i-1]]; if(openCar===i)openCar=i-1; else if(openCar===i-1)openCar=i; markDirty(); renderCars(); }
+  else if(act==='down'&& i<DATA.cars.length-1){ [DATA.cars[i+1],DATA.cars[i]]=[DATA.cars[i],DATA.cars[i+1]]; if(openCar===i)openCar=i+1; else if(openCar===i+1)openCar=i; markDirty(); renderCars(); }
+  else if(act==='addtag'){ DATA.cars[i].tags=DATA.cars[i].tags||[]; if(DATA.cars[i].tags.length<3){DATA.cars[i].tags.push({en:'',zh:''}); markDirty(); renderCars();} }
+  else if(act==='deltag'){ DATA.cars[i].tags.splice(+b.dataset.j,1); markDirty(); renderCars(); }
+});
+// re-render on category/featured change
+carList.addEventListener('change',e=>{
+  const el=e.target;
+  if(el.dataset && el.dataset.rerender){ /* value already written by input handler? selects fire change */ if(el.dataset.path){let v=el.type==='checkbox'?el.checked:el.value;setByPath(DATA,el.dataset.path,v);} markDirty(); renderCars(); }
+  if(el.dataset && el.dataset.act==='img'){ handleImg(el, +el.dataset.i); }
+});
+
+document.getElementById('addCar').addEventListener('click',()=>{
+  const firstCat=(DATA.categories.find(c=>c.id!=='all')||{id:'suv'}).id;
+  DATA.cars.unshift({id:'car-'+Date.now(),featured:false,category:firstCat,name:{en:'New car',zh:'新车'},year:new Date().getFullYear(),image:'',alt:'',price:{en:'Enquire',zh:'询价'},tags:[{en:'',zh:''}]});
+  openCar=0; markDirty(); renderCars();
+  window.scrollTo({top:document.getElementById('panel-cars').offsetTop,behavior:'smooth'});
+});
+
+/* image upload -> resized dataURL */
+function fileToDataURL(file,maxW,q){return new Promise((res,rej)=>{const img=new Image();const url=URL.createObjectURL(file);img.onload=()=>{let w=img.width,h=img.height;if(w>maxW){h=Math.round(h*maxW/w);w=maxW;}const cv=document.createElement('canvas');cv.width=w;cv.height=h;cv.getContext('2d').drawImage(img,0,0,w,h);URL.revokeObjectURL(url);res(cv.toDataURL('image/jpeg',q||0.82));};img.onerror=()=>{URL.revokeObjectURL(url);rej();};img.src=url;});}
+async function handleImg(input,i){
+  const f=input.files&&input.files[0]; if(!f) return;
+  try{
+    const durl=await fileToDataURL(f,1280,0.82);
+    DATA.cars[i].image=durl; markDirty();
+    const p=document.getElementById('prev-'+i); if(p){p.src=durl;p.style.opacity=1;}
+    const pathInput=document.querySelector(`input[data-path="cars.${i}.image"]`); if(pathInput) pathInput.value='(embedded photo)';
+    const thumb=document.querySelector(`[data-carblock="${i}"] .thumb`); if(thumb){thumb.src=durl;thumb.style.opacity=1;}
+  }catch(err){ alert('Could not read that image.'); }
+}
+
+/* ============ HOMEPAGE TEXT ============ */
+function txt(path,label,multiline){
+  const v=getByPath(DATA,path); const val=esc(v==null?'':v);
+  const en=path+'.en', zh=path+'.zh';
+  const fEn=getByPath(DATA,en), fZh=getByPath(DATA,zh);
+  return `
+   <div class="field"><label>${label} <span class="lng">EN</span></label>
+     ${multiline?`<textarea data-path="${en}">${esc(fEn)}</textarea>`:`<input data-path="${en}" value="${esc(fEn)}">`}</div>
+   <div class="field"><label>${label} <span class="lng">中文</span></label>
+     ${multiline?`<textarea data-path="${zh}">${esc(fZh)}</textarea>`:`<input data-path="${zh}" value="${esc(fZh)}">`}</div>`;
+}
+function renderText(){
+  const c=DATA.content||{};
+  const sec=(id,title,rows)=>`<div class="section-card"><h2>${title}</h2><div class="grid2">${rows}</div></div>`;
+  let html='';
+  html+=`<p class="smallnote" style="margin:.2rem 0 1rem">Tip: in the big titles you can press Enter to add a line break. The “accent” word shows in gold.</p>`;
+  html+=sec('hero','Hero (top of page)',
+      txt('content.hero.eyebrow','Eyebrow')
+    + txt('content.hero.title','Title',true)
+    + txt('content.hero.accent','Title gold word')
+    + txt('content.hero.lead','Subtitle',true)
+    + txt('content.hero.tags.0','Tag 1')
+    + txt('content.hero.tags.1','Tag 2')
+    + txt('content.hero.tags.2','Tag 3'));
+  const simple=[['inventory','“Explore our collection” section'],['services','Services section'],['why','“Why choose us” section'],['brands','Brands section'],['faq','FAQ section'],['cta','Bottom call-to-action'],['contact','Contact section']];
+  simple.forEach(([k,t])=>{
+    let rows=txt(`content.${k}.eyebrow`,'Eyebrow')+txt(`content.${k}.title`,'Title',k==='why');
+    if(k==='why') rows+=txt('content.why.accent','Title gold word');
+    if(c[k]&&c[k].intro!==undefined) rows+=txt(`content.${k}.intro`,'Intro text',true);
+    html+=sec(k,t,rows);
+  });
+  document.getElementById('textForm').innerHTML=html;
+}
+
+/* ============ CATEGORIES ============ */
+const catList=document.getElementById('catList');
+function renderCats(){
+  catList.innerHTML=DATA.categories.map((c,i)=>`
+    <div class="grid2" data-catrow="${i}" style="align-items:end;margin-bottom:.5rem">
+      <div class="field"><label>id ${c.id==='all'?'<span class="lng">locked</span>':''}</label><input data-path="categories.${i}.id" value="${esc(c.id)}" ${c.id==='all'?'disabled':''}></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:.6rem;align-items:end">
+        <div class="field"><label>Label EN</label><input data-path="categories.${i}.label.en" value="${esc(c.label.en)}"></div>
+        <div class="field"><label>Label 中文</label><input data-path="categories.${i}.label.zh" value="${esc(c.label.zh)}"></div>
+        <button class="iconbtn del" title="Remove" data-act="delcat" data-i="${i}" ${c.id==='all'?'disabled style="opacity:.3"':''}>🗑</button>
+      </div>
+    </div>`).join('');
+}
+catList.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act="delcat"]'); if(!b) return;
+  const i=+b.dataset.i; if(DATA.categories[i].id==='all') return;
+  if(confirm('Remove this category? Cars using it will stay but won\'t match a filter.')){ DATA.categories.splice(i,1); markDirty(); renderCats(); }
+});
+document.getElementById('addCat').addEventListener('click',()=>{
+  DATA.categories.push({id:'new-'+(DATA.categories.length),label:{en:'New',zh:'新'}}); markDirty(); renderCats();
+});
+
+/* ============ PUBLISH ============ */
+function applyPreview(){
+  try{ localStorage.setItem('cce-admin-data',JSON.stringify(DATA)); setStatus('draft');
+       toast('Preview saved — open the site in this browser to see it.'); }
+  catch(e){ alert('Could not save preview (storage full?). Try downloading data.js instead.'); }
+}
+function discardDraft(){
+  if(!confirm('Discard your local draft and reload the published content?')) return;
+  try{localStorage.removeItem('cce-admin-data');}catch(e){}
+  location.reload();
+}
+const STORE_FALLBACK = [
+'window.Store=(function(){',
+'function adminOverride(){try{var raw=localStorage.getItem("cce-admin-data");return raw?JSON.parse(raw):null;}catch(e){return null;}}',
+'function data(){return adminOverride()||window.SITE_DATA;}',
+'return{',
+'getConfig:function(){return data().config;},',
+'getContent:function(){return data().content;},',
+'getEffective:function(){return data();},',
+'getCategories:function(){return data().categories;},',
+'getCars:function(){return data().cars;},',
+'getFeatured:function(){return data().cars.filter(function(c){return c.featured;});},',
+'getCarsByCategory:function(cat){return(!cat||cat==="all")?data().cars:data().cars.filter(function(c){return c.category===cat;});},',
+'carCardHTML:function(car){',
+'var wa="https://wa.me/"+data().config.whatsapp;',
+'var tags=(car.tags||[]).map(function(t){return \'<span class="tag"><span class="en-only">\'+t.en+\'</span><span class="zh-only">\'+t.zh+\'</span></span>\';}).join("");',
+'var msg=encodeURIComponent("Hi! I am interested in the "+car.name.en+" ("+car.year+").");',
+'return \'<article class="ccard" data-category="\'+car.category+\'"><div class="ph"><img src="\'+car.image+\'" alt="\'+(car.alt||car.name.en)+\'" loading="lazy"><div class="tags">\'+tags+\'</div></div><div class="body"><div class="yr">\'+car.year+\'</div><h3><span class="en-only">\'+car.name.en+\'</span><span class="zh-only">\'+car.name.zh+\'</span></h3><div class="row"><span class="price"><span class="en-only">\'+car.price.en+\'</span><span class="zh-only">\'+car.price.zh+\'</span></span><a class="go" href="\'+wa+\'?text=\'+msg+\'" aria-label="Enquire">↗</a></div></div></article>\';',
+'}};})();'
+].join('\n');
+
+async function buildDataJs(){
+  const block='/* __DATA_START__  (admin.html rewrites everything between these markers) */\nwindow.SITE_DATA = '+JSON.stringify(DATA,null,2)+';\n/* __DATA_END__ */';
+  let tpl=null;
+  try{ tpl=await (await fetch('data.js?_='+Date.now(),{cache:'no-store'})).text(); }catch(e){ tpl=null; }
+  if(tpl && /\/\* __DATA_START__[\s\S]*?__DATA_END__ \*\//.test(tpl)){
+    return tpl.replace(/\/\* __DATA_START__[\s\S]*?__DATA_END__ \*\//, block.replace(/\$/g,'$$$$'));
+  }
+  // fallback (e.g. opened from file://): rebuild a complete, working file
+  return '/* CHEAP CARS EXPORT — data (generated by admin) */\n'+block+'\n\n'+STORE_FALLBACK+'\n';
+}
+async function downloadDataJs(){
+  const text=await buildDataJs();
+  const blob=new Blob([text],{type:'text/javascript'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='data.js';
+  document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(a.href);
+  toast('data.js downloaded — commit it to your repo to go live.');
+}
+
+function b64utf8(str){const bytes=new TextEncoder().encode(str);let bin='';const CH=0x8000;for(let i=0;i<bytes.length;i+=CH){bin+=String.fromCharCode.apply(null,bytes.subarray(i,i+CH));}return btoa(bin);}
+function ghLog(msg,cls){const l=document.getElementById('ghLog');l.classList.remove('hidden');l.textContent+=(cls==='warn'?'⚠ ':'')+msg+'\n';l.scrollTop=l.scrollHeight;}
+async function commitGitHub(){
+  const owner=document.getElementById('ghOwner').value.trim();
+  const repo=document.getElementById('ghRepo').value.trim();
+  const branch=document.getElementById('ghBranch').value.trim()||'main';
+  const path=document.getElementById('ghPath').value.trim()||'data.js';
+  const token=document.getElementById('ghToken').value.trim();
+  if(!owner||!repo||!token){ alert('Fill owner, repository and token first.'); return; }
+  if(document.getElementById('ghRemember').checked){ try{localStorage.setItem('cce-gh-token',token);localStorage.setItem('cce-gh-cfg',JSON.stringify({owner,repo,branch,path}));}catch(e){} }
+  const api=`https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}`;
+  const H={Authorization:'Bearer '+token,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'};
+  document.getElementById('ghLog').textContent='';
+  try{
+    ghLog('Reading current '+path+' …');
+    let sha=null;
+    const g=await fetch(`${api}?ref=${encodeURIComponent(branch)}`,{headers:H});
+    if(g.status===200){ sha=(await g.json()).sha; ghLog('Found existing file.'); }
+    else if(g.status===404){ ghLog('No existing file — will create it.'); }
+    else if(g.status===401){ ghLog('Token rejected (401). Check the token.','warn'); return; }
+    else { ghLog('Unexpected status '+g.status+' reading file.','warn'); }
+    ghLog('Committing …');
+    const body={message:'Update site content via admin panel',content:b64utf8(await buildDataJs()),branch};
+    if(sha) body.sha=sha;
+    const put=await fetch(api,{method:'PUT',headers:{...H,'Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(put.status===200||put.status===201){
+      const j=await put.json();
+      ghLog('✓ Published. Commit: '+(j.commit&&j.commit.sha||'').slice(0,7));
+      ghLog('GitHub Pages will rebuild in ~1 minute.');
+      setStatus('published');
+    }else{
+      const j=await put.json().catch(()=>({}));
+      ghLog('Failed ('+put.status+'): '+(j.message||'unknown error'),'warn');
+      if(put.status===403) ghLog('Token likely missing "Contents: Read & write" for this repo.','warn');
+    }
+  }catch(err){ ghLog('Network error: '+err.message,'warn'); }
+}
+
+/* ============ misc ============ */
+let toastT;
+function toast(msg){ const b=document.getElementById('barStatus'); b.textContent=msg; clearTimeout(toastT); toastT=setTimeout(()=>setStatus(state),3500); }
+
+document.getElementById('previewBtn').addEventListener('click',applyPreview);
+document.getElementById('previewBtn2').addEventListener('click',applyPreview);
+document.getElementById('dlBtn').addEventListener('click',downloadDataJs);
+document.getElementById('dlBtn2').addEventListener('click',downloadDataJs);
+document.getElementById('commitBtn').addEventListener('click',commitGitHub);
+document.getElementById('resetDraft').addEventListener('click',discardDraft);
+document.getElementById('forgetToken').addEventListener('click',()=>{try{localStorage.removeItem('cce-gh-token');}catch(e){}document.getElementById('ghToken').value='';toast('Token forgotten on this device.');});
+
+/* prefill github form + remembered token */
+(function(){
+  document.getElementById('ghOwner').value='DevEr0';
+  document.getElementById('ghRepo').value='car_export';
+  document.getElementById('ghBranch').value='main';
+  document.getElementById('ghPath').value='data.js';
+  try{
+    const cfg=JSON.parse(localStorage.getItem('cce-gh-cfg')||'null');
+    if(cfg){ghOwner.value=cfg.owner;ghRepo.value=cfg.repo;ghBranch.value=cfg.branch;ghPath.value=cfg.path;}
+    const tk=localStorage.getItem('cce-gh-token');
+    if(tk){document.getElementById('ghToken').value=tk;document.getElementById('ghRemember').checked=true;}
+  }catch(e){}
+})();
+
+/* boot */
+function hydrateStatic(scope){
+  scope.querySelectorAll('[data-path]').forEach(el=>{
+    const v=getByPath(DATA, el.dataset.path);
+    if(el.type==='checkbox') el.checked=!!v; else el.value=(v==null?'':v);
+  });
+}
+hydrateStatic(document.getElementById('panel-contact'));
+renderCars(); renderText(); renderCats();
+setStatus(state);
+</script>
+</body>
+</html>
