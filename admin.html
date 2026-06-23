@@ -25,6 +25,15 @@ a{color:var(--gold)}
 .wrap{width:min(1080px,94vw);margin-inline:auto}
 .eyebrow{font-family:'Sora';font-weight:700;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
 
+/* bilingual (same pattern as the main site) */
+.zh-only{display:none}
+body.zh .en-only{display:none}
+body.zh .zh-only{display:inline}
+body.zh .zh-only.blk{display:block}
+.langtog{display:inline-flex;border:1px solid var(--border);border-radius:999px;overflow:hidden;flex:none}
+.langtog button{background:transparent;color:var(--text-soft);border:0;padding:.32rem .72rem;font-family:'Sora';font-weight:700;font-size:.74rem;cursor:pointer;transition:.2s}
+.langtog button.on{background:var(--gold);color:var(--on-gold)}
+
 /* header */
 header{position:sticky;top:0;z-index:40;background:rgba(11,11,13,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
 .head-in{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem 0}
@@ -137,44 +146,47 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
 <div id="gate" class="gate hidden">
   <div class="gate-card">
     <img src="logo.png" alt="" class="gate-logo" onerror="this.style.display='none'">
-    <h2>Admin access</h2>
-    <p class="sub">Enter the password to manage the site.</p>
-    <input id="gatePass" type="password" placeholder="Password" autocomplete="current-password">
+    <h2><span class="en-only">Admin access</span><span class="zh-only">管理员登录</span></h2>
+    <p class="sub"><span class="en-only">Enter the password to manage the site.</span><span class="zh-only">输入密码以管理网站。</span></p>
+    <input id="gatePass" type="password" placeholder="密码" data-ph-en="Password" data-ph-zh="密码" autocomplete="current-password">
     <div id="gateErr" class="gate-err"></div>
-    <button class="btn btn-gold" id="gateBtn" style="width:100%;justify-content:center">Unlock</button>
-    <p class="gate-note">Forgot it? Edit <b>data.js</b> in your repo and change the <b>admin.hash</b> value (or ask whoever set it up).</p>
+    <button class="btn btn-gold" id="gateBtn" style="width:100%;justify-content:center"><span class="en-only">Unlock</span><span class="zh-only">解锁</span></button>
+    <p class="gate-note"><span class="en-only">Forgot it? Edit <b>data.js</b> in your repo and change the <b>admin.hash</b> value (or ask whoever set it up).</span><span class="zh-only">忘记密码？在仓库中编辑 <b>data.js</b>，修改 <b>admin.hash</b> 的值（或询问设置者）。</span></p>
   </div>
 </div>
 
 <header>
   <div class="wrap head-in">
-    <div class="brand"><img src="logo.png" alt="logo">Cheap<b>Cars</b>Export<span class="tagadmin">ADMIN</span></div>
-    <div id="statusPill" class="pill">Loading…</div>
+    <div class="brand"><img src="logo.png" alt="logo">Cheap<b>Cars</b>Export<span class="tagadmin"><span class="en-only">ADMIN</span><span class="zh-only">管理后台</span></span></div>
+    <div style="display:flex;align-items:center;gap:.6rem">
+      <div class="langtog" id="langTog"><button data-l="zh">中文</button><button data-l="en">EN</button></div>
+      <div id="statusPill" class="pill">…</div>
+    </div>
   </div>
 </header>
 
 <main class="wrap">
 
   <div class="note">
-    <h3>How this works <span style="font-weight:400;color:var(--text-soft);font-size:.85rem">— read once</span></h3>
-    <p>Edit anything below, then choose how to save:</p>
-    <p>① <b>Preview on this device</b> — see your changes on the live site immediately, but <b>only in this browser</b>. Good for checking before going public.</p>
-    <p>② <b>Publish</b> — makes changes visible to <b>everyone</b>. Because this is a static GitHub Pages site, publishing means saving the <b>data.js</b> file back to your repository — either by <b>downloading it</b> and uploading to GitHub, or by <b>committing directly</b> with a GitHub token (set up once). Both are on the <b>Publish</b> tab.</p>
+    <h3><span class="en-only">How this works</span><span class="zh-only">使用说明</span> <span style="font-weight:400;color:var(--text-soft);font-size:.85rem"><span class="en-only">— read once</span><span class="zh-only">—— 看一次即可</span></span></h3>
+    <p><span class="en-only">Edit anything below, then choose how to save:</span><span class="zh-only">在下方编辑内容，然后选择保存方式：</span></p>
+    <p><span class="en-only">① <b>Preview on this device</b> — see your changes on the live site immediately, but <b>only in this browser</b>. Good for checking before going public.</span><span class="zh-only">① <b>在本设备预览</b> —— 立即在网站上看到您的改动，但<b>仅限当前浏览器</b>可见。适合发布前自查。</span></p>
+    <p><span class="en-only">② <b>Publish</b> — makes changes visible to <b>everyone</b>. Because this is a static GitHub Pages site, publishing means saving the <b>data.js</b> file back to your repository — either by <b>downloading it</b> and uploading to GitHub, or by <b>committing directly</b> with a GitHub token (set up once). Both are on the <b>Publish</b> tab.</span><span class="zh-only">② <b>发布</b> —— 让<b>所有访客</b>都能看到改动。由于本站是 GitHub Pages 静态网站，发布即把 <b>data.js</b> 文件保存回您的仓库 —— 可以<b>下载文件</b>并上传到 GitHub，或使用 GitHub 令牌<b>直接提交</b>（仅需设置一次）。两种方式都在<b>「发布」</b>标签页。</span></p>
   </div>
 
   <div class="tabs" id="tabs">
-    <button class="tab active" data-tab="cars">🚗 Cars</button>
-    <button class="tab" data-tab="text">📝 Homepage text</button>
-    <button class="tab" data-tab="contact">📞 Contact &amp; social</button>
-    <button class="tab" data-tab="cats">🏷️ Categories</button>
-    <button class="tab" data-tab="publish">🚀 Publish</button>
+    <button class="tab active" data-tab="cars">🚗 <span class="en-only">Cars</span><span class="zh-only">车辆</span></button>
+    <button class="tab" data-tab="text">📝 <span class="en-only">Homepage text</span><span class="zh-only">首页文字</span></button>
+    <button class="tab" data-tab="contact">📞 <span class="en-only">Contact &amp; social</span><span class="zh-only">联系方式</span></button>
+    <button class="tab" data-tab="cats">🏷️ <span class="en-only">Categories</span><span class="zh-only">分类</span></button>
+    <button class="tab" data-tab="publish">🚀 <span class="en-only">Publish</span><span class="zh-only">发布</span></button>
   </div>
 
   <!-- CARS -->
   <section class="panel active" id="panel-cars">
     <div class="add-wrap">
-      <div><span class="eyebrow">Inventory</span><div class="smallnote">Drag isn't needed — use ▲▼ to reorder. The first cars marked ★ show in the homepage slider.</div></div>
-      <button class="btn btn-gold" id="addCar">+ Add car</button>
+      <div><span class="eyebrow"><span class="en-only">Inventory</span><span class="zh-only">库存</span></span><div class="smallnote"><span class="en-only">Drag isn't needed — use ▲▼ to reorder. The first cars marked ★ show in the homepage slider.</span><span class="zh-only">无需拖动 —— 用 ▲▼ 排序。标记 ★ 的前几辆车会显示在首页轮播中。</span></div></div>
+      <button class="btn btn-gold" id="addCar"><span class="en-only">+ Add car</span><span class="zh-only">＋ 添加车辆</span></button>
     </div>
     <div id="carList"></div>
   </section>
@@ -187,15 +199,15 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
   <!-- CONTACT -->
   <section class="panel" id="panel-contact">
     <div class="section-card">
-      <h2>Contact &amp; social</h2>
-      <p class="sub">These update the WhatsApp button, every enquiry link, and the contact details across the whole site.</p>
+      <h2><span class="en-only">Contact &amp; social</span><span class="zh-only">联系方式与社交</span></h2>
+      <p class="sub"><span class="en-only">These update the WhatsApp button, every enquiry link, and the contact details across the whole site.</span><span class="zh-only">这些会更新全站的 WhatsApp 按钮、所有咨询链接以及联系信息。</span></p>
       <div class="grid2">
-        <div class="field"><label>WhatsApp number <span class="lng">digits only</span></label><input data-path="config.whatsapp" placeholder="8615692496753"></div>
-        <div class="field"><label>WhatsApp shown as</label><input data-path="config.whatsappDisplay" placeholder="+86 156 9249 6753"></div>
-        <div class="field"><label>Instagram handle <span class="lng">no @</span></label><input data-path="config.instagram" placeholder="cheap_exports"></div>
+        <div class="field"><label><span class="en-only">WhatsApp number</span><span class="zh-only">WhatsApp 号码</span> <span class="lng"><span class="en-only">digits only</span><span class="zh-only">仅数字</span></span></label><input data-path="config.whatsapp" placeholder="8615692496753"></div>
+        <div class="field"><label><span class="en-only">WhatsApp shown as</span><span class="zh-only">WhatsApp 显示为</span></label><input data-path="config.whatsappDisplay" placeholder="+86 156 9249 6753"></div>
+        <div class="field"><label>Instagram <span class="lng"><span class="en-only">no @</span><span class="zh-only">不含 @</span></span></label><input data-path="config.instagram" placeholder="cheap_exports"></div>
         <div class="field"></div>
-        <div class="field"><label>Location <span class="lng">EN</span></label><input data-path="config.location.en" placeholder="Guangzhou, China"></div>
-        <div class="field"><label>Location <span class="lng">中文</span></label><input data-path="config.location.zh" placeholder="中国广州"></div>
+        <div class="field"><label><span class="en-only">Location</span><span class="zh-only">地址</span> <span class="lng">EN</span></label><input data-path="config.location.en" placeholder="Guangzhou, China"></div>
+        <div class="field"><label><span class="en-only">Location</span><span class="zh-only">地址</span> <span class="lng">中文</span></label><input data-path="config.location.zh" placeholder="中国广州"></div>
       </div>
     </div>
   </section>
@@ -203,10 +215,10 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
   <!-- CATEGORIES -->
   <section class="panel" id="panel-cats">
     <div class="section-card">
-      <h2>Categories</h2>
-      <p class="sub">The filter buttons on the “All cars” page. Each car is assigned one category by its <b>id</b>.</p>
+      <h2><span class="en-only">Categories</span><span class="zh-only">分类</span></h2>
+      <p class="sub"><span class="en-only">The filter buttons on the “All cars” page. Each car is assigned one category by its <b>id</b>.</span><span class="zh-only">「全部车辆」页面上的筛选按钮。每辆车通过其 <b>id</b> 归入一个分类。</span></p>
       <div id="catList"></div>
-      <button class="btn btn-ghost btn-sm" id="addCat">+ Add category</button>
+      <button class="btn btn-ghost btn-sm" id="addCat"><span class="en-only">+ Add category</span><span class="zh-only">＋ 添加分类</span></button>
     </div>
   </section>
 
@@ -214,57 +226,57 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
   <section class="panel" id="panel-publish">
     <div class="pubgrid">
       <div class="section-card">
-        <h2>Option A — Download &amp; upload</h2>
-        <p class="sub">Easiest. No setup. Works for anyone.</p>
-        <div class="step"><span class="n">1</span><span>Click <b>Download data.js</b>.</span></div>
-        <div class="step"><span class="n">2</span><span>Go to your repo on github.com → open <b>data.js</b> → click the ✏️ pencil.</span></div>
-        <div class="step"><span class="n">3</span><span>Select all, paste the new file, and <b>Commit changes</b>.</span></div>
-        <div class="step"><span class="n">4</span><span>GitHub Pages republishes in ~1 minute. Done — live for everyone.</span></div>
-        <button class="btn btn-gold" id="dlBtn" style="margin-top:.6rem">⬇ Download data.js</button>
+        <h2><span class="en-only">Option A — Download &amp; upload</span><span class="zh-only">方式 A —— 下载并上传</span></h2>
+        <p class="sub"><span class="en-only">Easiest. No setup. Works for anyone.</span><span class="zh-only">最简单，无需设置，人人可用。</span></p>
+        <div class="step"><span class="n">1</span><span><span class="en-only">Click <b>Download data.js</b>.</span><span class="zh-only">点击<b>「下载 data.js」</b>。</span></span></div>
+        <div class="step"><span class="n">2</span><span><span class="en-only">Go to your repo on github.com → open <b>data.js</b> → click the ✏️ pencil.</span><span class="zh-only">打开 github.com 上的仓库 → 打开 <b>data.js</b> → 点击 ✏️ 铅笔图标。</span></span></div>
+        <div class="step"><span class="n">3</span><span><span class="en-only">Select all, paste the new file, and <b>Commit changes</b>.</span><span class="zh-only">全选，粘贴新文件，然后点击 <b>Commit changes</b>。</span></span></div>
+        <div class="step"><span class="n">4</span><span><span class="en-only">GitHub Pages republishes in ~1 minute. Done — live for everyone.</span><span class="zh-only">GitHub Pages 约 1 分钟后重新发布。完成 —— 所有人可见。</span></span></div>
+        <button class="btn btn-gold" id="dlBtn" style="margin-top:.6rem">⬇ <span class="en-only">Download data.js</span><span class="zh-only">下载 data.js</span></button>
       </div>
 
       <div class="section-card">
-        <h2>Option B — Commit directly</h2>
-        <p class="sub">One-time setup, then publishing is one click forever.</p>
+        <h2><span class="en-only">Option B — Commit directly</span><span class="zh-only">方式 B —— 直接提交</span></h2>
+        <p class="sub"><span class="en-only">One-time setup, then publishing is one click forever.</span><span class="zh-only">设置一次，之后一键发布。</span></p>
         <div class="grid2">
-          <div class="field"><label>GitHub owner</label><input id="ghOwner" placeholder="DevEr0"></div>
-          <div class="field"><label>Repository</label><input id="ghRepo" placeholder="car_export"></div>
-          <div class="field"><label>Branch</label><input id="ghBranch" placeholder="main"></div>
-          <div class="field"><label>File path</label><input id="ghPath" placeholder="data.js"></div>
+          <div class="field"><label><span class="en-only">GitHub owner</span><span class="zh-only">GitHub 用户名</span></label><input id="ghOwner" placeholder="DevEr0"></div>
+          <div class="field"><label><span class="en-only">Repository</span><span class="zh-only">仓库</span></label><input id="ghRepo" placeholder="car_export"></div>
+          <div class="field"><label><span class="en-only">Branch</span><span class="zh-only">分支</span></label><input id="ghBranch" placeholder="main"></div>
+          <div class="field"><label><span class="en-only">File path</span><span class="zh-only">文件路径</span></label><input id="ghPath" placeholder="data.js"></div>
         </div>
-        <div class="field"><label>Personal access token <span class="lng">kept on this device only</span></label><input id="ghToken" type="password" placeholder="github_pat_…"></div>
+        <div class="field"><label><span class="en-only">Personal access token</span><span class="zh-only">个人访问令牌</span> <span class="lng"><span class="en-only">kept on this device only</span><span class="zh-only">仅保存在本设备</span></span></label><input id="ghToken" type="password" placeholder="github_pat_…"></div>
         <label style="display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--text-soft);margin:.3rem 0">
-          <input type="checkbox" id="ghRemember" style="width:auto"> Remember token on this device
+          <input type="checkbox" id="ghRemember" style="width:auto"> <span class="en-only">Remember token on this device</span><span class="zh-only">在本设备记住令牌</span>
         </label>
         <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.3rem">
-          <button class="btn btn-gold" id="commitBtn">🚀 Publish to GitHub</button>
-          <button class="btn btn-ghost btn-sm" id="forgetToken">Forget token</button>
+          <button class="btn btn-gold" id="commitBtn">🚀 <span class="en-only">Publish to GitHub</span><span class="zh-only">发布到 GitHub</span></button>
+          <button class="btn btn-ghost btn-sm" id="forgetToken"><span class="en-only">Forget token</span><span class="zh-only">清除令牌</span></button>
         </div>
-        <p class="smallnote">Create a token at github.com → Settings → Developer settings → <b>Fine-grained tokens</b>, scoped to this repo with <b>Contents: Read &amp; write</b>. Anyone with this token can edit the repo, so keep it private.</p>
+        <p class="smallnote"><span class="en-only">Create a token at github.com → Settings → Developer settings → <b>Fine-grained tokens</b>, scoped to this repo with <b>Contents: Read &amp; write</b>. Anyone with this token can edit the repo, so keep it private.</span><span class="zh-only">在 github.com → Settings → Developer settings → <b>Fine-grained tokens</b> 中创建，仅授权本仓库的 <b>Contents：读写</b> 权限。持有此令牌者可编辑仓库，请妥善保管。</span></p>
         <div class="log hidden" id="ghLog"></div>
       </div>
     </div>
 
     <div class="section-card">
-      <h2>🔒 Security — admin password</h2>
-      <p class="sub">This password protects <b>admin.html</b> on your live site. The site's content (cars, text) is also protected separately — publishing always needs your GitHub token, so visitors can never change the real site even if they open the admin.</p>
+      <h2>🔒 <span class="en-only">Security — admin password</span><span class="zh-only">安全 —— 管理密码</span></h2>
+      <p class="sub"><span class="en-only">This password protects <b>admin.html</b> on your live site. The site's content (cars, text) is also protected separately — publishing always needs your GitHub token, so visitors can never change the real site even if they open the admin.</span><span class="zh-only">此密码用于保护您线上网站的 <b>admin.html</b>。网站内容（车辆、文字）另有保护 —— 发布始终需要您的 GitHub 令牌，因此即使访客打开后台，也无法更改真实网站。</span></p>
       <div class="grid2">
-        <div class="field"><label>New password</label><input id="newPass" type="password" placeholder="Type a new password"></div>
-        <div class="field"><label>&nbsp;</label><button class="btn btn-gold" id="setPass">Set password</button></div>
+        <div class="field"><label><span class="en-only">New password</span><span class="zh-only">新密码</span></label><input id="newPass" type="password" placeholder="输入新密码" data-ph-en="Type a new password" data-ph-zh="输入新密码"></div>
+        <div class="field"><label>&nbsp;</label><button class="btn btn-gold" id="setPass"><span class="en-only">Set password</span><span class="zh-only">设置密码</span></button></div>
       </div>
       <label style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--text);margin:.5rem 0">
-        <input type="checkbox" id="gateToggle" style="width:auto"> Require a password to open the admin
+        <input type="checkbox" id="gateToggle" style="width:auto"> <span class="en-only">Require a password to open the admin</span><span class="zh-only">打开后台需要输入密码</span>
       </label>
-      <p class="smallnote" id="secMsg">Changes take effect for everyone after you <b>Publish</b>. (You stay logged in on this device.)</p>
+      <p class="smallnote" id="secMsg"><span class="en-only">Changes take effect for everyone after you <b>Publish</b>. (You stay logged in on this device.)</span><span class="zh-only">改动在您<b>「发布」</b>后对所有人生效。（本设备保持登录状态。）</span></p>
     </div>
 
     <div class="section-card">
-      <h2>Local draft</h2>
-      <p class="sub">“Preview on this device” saves a draft in this browser. It never affects other visitors until you publish.</p>
+      <h2><span class="en-only">Local draft</span><span class="zh-only">本地草稿</span></h2>
+      <p class="sub"><span class="en-only">“Preview on this device” saves a draft in this browser. It never affects other visitors until you publish.</span><span class="zh-only">「在本设备预览」会在此浏览器中保存草稿，发布前不会影响其他访客。</span></p>
       <div style="display:flex;gap:.5rem;flex-wrap:wrap">
-        <button class="btn btn-ghost btn-sm" id="previewBtn2">👁 Preview on this device</button>
-        <button class="btn btn-danger btn-sm" id="resetDraft">↺ Discard local draft</button>
-        <a class="btn btn-ghost btn-sm" href="index.html" target="_blank">↗ Open site</a>
+        <button class="btn btn-ghost btn-sm" id="previewBtn2">👁 <span class="en-only">Preview on this device</span><span class="zh-only">在本设备预览</span></button>
+        <button class="btn btn-danger btn-sm" id="resetDraft">↺ <span class="en-only">Discard local draft</span><span class="zh-only">放弃本地草稿</span></button>
+        <a class="btn btn-ghost btn-sm" href="index.html" target="_blank">↗ <span class="en-only">Open site</span><span class="zh-only">打开网站</span></a>
       </div>
     </div>
   </section>
@@ -274,10 +286,10 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
 <!-- sticky actions -->
 <div class="actionbar">
   <div class="wrap in">
-    <div class="status" id="barStatus">Ready</div>
-    <button class="btn btn-ghost" id="previewBtn">👁 Preview on this device</button>
-    <button class="btn btn-ghost" id="dlBtn2">⬇ Download data.js</button>
-    <button class="btn btn-gold" id="publishJump">🚀 Publish…</button>
+    <div class="status" id="barStatus"></div>
+    <button class="btn btn-ghost" id="previewBtn">👁 <span class="en-only">Preview on this device</span><span class="zh-only">在本设备预览</span></button>
+    <button class="btn btn-ghost" id="dlBtn2">⬇ <span class="en-only">Download data.js</span><span class="zh-only">下载 data.js</span></button>
+    <button class="btn btn-gold" id="publishJump">🚀 <span class="en-only">Publish…</span><span class="zh-only">发布…</span></button>
   </div>
 </div>
 
@@ -308,18 +320,33 @@ let DATA=null, state='clean';
   state = (()=>{try{return localStorage.getItem('cce-admin-data')?'draft':'clean';}catch(e){return 'clean';}})();
 })();
 
+/* ============ LANGUAGE (中文 default) ============ */
+let LANG = (()=>{try{return localStorage.getItem('cce-admin-lang')||'zh';}catch(e){return 'zh';}})();
+function t(en,zh){ return LANG==='zh'?zh:en; }
+function L(en,zh){ return '<span class="en-only">'+en+'</span><span class="zh-only">'+zh+'</span>'; }
+function applyLangChrome(){
+  document.body.classList.toggle('zh', LANG==='zh');
+  document.querySelectorAll('#langTog button').forEach(b=>b.classList.toggle('on', b.dataset.l===LANG));
+  document.querySelectorAll('[data-ph-en]').forEach(el=>{ el.placeholder = LANG==='zh'? el.dataset.phZh : el.dataset.phEn; });
+}
+function setLang(l){
+  LANG=l; try{localStorage.setItem('cce-admin-lang',l);}catch(e){}
+  applyLangChrome();
+  if(DATA){ setStatus(state); renderCars(); renderText(); renderCats(); }
+}
+
 function setStatus(s){
   state=s;
   const pill=document.getElementById('statusPill');
   const bar=document.getElementById('barStatus');
   const map={
-    clean:['Loaded published content','pill','Showing what is currently live.'],
-    dirty:['Unsaved changes','pill dirty','You have edits that are not saved anywhere yet.'],
-    draft:['Draft on this device','pill dirty','Visible only in your browser. Publish to go live for everyone.'],
-    published:['Published ✓','pill saved','Live for everyone (GitHub Pages may take ~1 min).']
+    clean:[t('Loaded published content','已加载线上内容'),'pill',t('Showing what is currently live.','显示当前线上的内容。')],
+    dirty:[t('Unsaved changes','有未保存的更改'),'pill dirty',t('You have edits that are not saved anywhere yet.','您有改动尚未保存到任何位置。')],
+    draft:[t('Draft on this device','本设备草稿'),'pill dirty',t('Visible only in your browser. Publish to go live for everyone.','仅在您的浏览器可见。发布后对所有人生效。')],
+    published:[t('Published ✓','已发布 ✓'),'pill saved',t('Live for everyone (GitHub Pages may take ~1 min).','已对所有人生效（GitHub Pages 约需 1 分钟）。')]
   };
-  const [t,cls,msg]=map[s]||map.clean;
-  pill.textContent=t; pill.className=cls;
+  const [pillTxt,cls,msg]=map[s]||map.clean;
+  pill.textContent=pillTxt; pill.className=cls;
   bar.textContent=msg;
 }
 function markDirty(){ if(state!=='dirty'){ setStatus('dirty'); } }
@@ -338,7 +365,7 @@ document.addEventListener('input',e=>{
 });
 function liveTouch(el){
   const row=el.closest('[data-carblock]');
-  if(row){ const i=+row.dataset.carblock; const nm=row.querySelector('.nm'); if(nm) nm.textContent=(DATA.cars[i].name.en||'(no name)'); }
+  if(row){ const i=+row.dataset.carblock; const s=row.querySelector('.nm .en-only'); if(s) s.textContent=(DATA.cars[i].name.en||'(no name)'); }
 }
 
 /* ============ TABS ============ */
@@ -371,14 +398,14 @@ function renderCars(){
       <div class="car-row">
         <img class="thumb" src="${esc(img)}" alt="" onerror="this.style.opacity=.25">
         <div class="meta">
-          <div class="nm">${esc(car.name.en||'(no name)')}${car.featured?'<span class="badge feat">★ slider</span>':''}<span class="badge">${esc(car.category||'—')}</span></div>
-          <div class="mm">${esc(String(car.year||''))} · ${esc((car.price&&car.price.en)||'')}</div>
+          <div class="nm">${L(esc(car.name.en||'(no name)'),esc(car.name.zh||car.name.en||'未命名'))}${car.featured?'<span class="badge feat">'+L('★ slider','★ 轮播')+'</span>':''}<span class="badge">${esc(car.category||'—')}</span></div>
+          <div class="mm">${esc(String(car.year||''))} · ${esc((car.price&&(LANG==='zh'?car.price.zh:car.price.en))||'')}</div>
         </div>
         <div class="acts">
-          <button class="iconbtn" title="Move up"  data-act="up"   data-i="${i}">▲</button>
-          <button class="iconbtn" title="Move down" data-act="down" data-i="${i}">▼</button>
-          <button class="iconbtn" title="Edit"      data-act="edit" data-i="${i}">✎</button>
-          <button class="iconbtn del" title="Delete" data-act="del"  data-i="${i}">🗑</button>
+          <button class="iconbtn" title="${t('Move up','上移')}"  data-act="up"   data-i="${i}">▲</button>
+          <button class="iconbtn" title="${t('Move down','下移')}" data-act="down" data-i="${i}">▼</button>
+          <button class="iconbtn" title="${t('Edit','编辑')}"      data-act="edit" data-i="${i}">✎</button>
+          <button class="iconbtn del" title="${t('Delete','删除')}" data-act="del"  data-i="${i}">🗑</button>
         </div>
       </div>
       ${open?carEditor(car,i):''}
@@ -387,38 +414,38 @@ function renderCars(){
 }
 
 function carEditor(car,i){
-  const tags=(car.tags||[]).map((t,j)=>`
+  const tags=(car.tags||[]).map((t2,j)=>`
     <div class="tagline">
-      <div class="field"><label>Tag ${j+1} <span class="lng">EN</span></label><input data-path="cars.${i}.tags.${j}.en" value="${esc(t.en)}"></div>
-      <div class="field"><label>&nbsp;<span class="lng">中文</span></label><input data-path="cars.${i}.tags.${j}.zh" value="${esc(t.zh)}"></div>
-      <button class="iconbtn del" title="Remove tag" data-act="deltag" data-i="${i}" data-j="${j}">✕</button>
+      <div class="field"><label>${L('Tag '+(j+1),'标签 '+(j+1))} <span class="lng">EN</span></label><input data-path="cars.${i}.tags.${j}.en" value="${esc(t2.en)}"></div>
+      <div class="field"><label>&nbsp;<span class="lng">中文</span></label><input data-path="cars.${i}.tags.${j}.zh" value="${esc(t2.zh)}"></div>
+      <button class="iconbtn del" title="${t('Remove tag','删除标签')}" data-act="deltag" data-i="${i}" data-j="${j}">✕</button>
     </div>`).join('');
   return `<div class="editor">
     <div class="imgrow">
       <img class="preview" id="prev-${i}" src="${esc(car.image||'')}" alt="" onerror="this.style.opacity=.25">
       <div style="flex:1;min-width:220px">
-        <div class="field"><label>Photo — upload from device <span class="lng">auto-resized</span></label>
+        <div class="field"><label>${L('Photo — upload from device','照片 —— 从设备上传')} <span class="lng">${L('auto-resized','自动压缩')}</span></label>
           <input type="file" accept="image/*" data-act="img" data-i="${i}"></div>
-        <div class="field"><label>…or image path / URL</label>
-          <input data-path="cars.${i}.image" value="${esc(car.image||'')}" placeholder="car-photo.jpg or https://…"></div>
-        <p class="smallnote">Uploaded photos are embedded in data.js (kept small). For many cars, prefer dropping files in the repo and using a path.</p>
+        <div class="field"><label>${L('…or image path / URL','……或图片路径 / 网址')}</label>
+          <input data-path="cars.${i}.image" value="${esc(car.image||'')}" placeholder="car-photo.jpg / https://…"></div>
+        <p class="smallnote">${L('Uploaded photos are embedded in data.js (kept small). For many cars, prefer dropping files in the repo and using a path.','上传的照片会内嵌进 data.js（已压缩）。车辆较多时，建议把图片放进仓库并填写路径。')}</p>
       </div>
     </div>
     <div class="grid2" style="margin-top:.7rem">
-      <div class="field"><label>Name <span class="lng">EN</span></label><input data-path="cars.${i}.name.en" data-live="1" value="${esc(car.name.en)}"></div>
-      <div class="field"><label>Name <span class="lng">中文</span></label><input data-path="cars.${i}.name.zh" value="${esc(car.name.zh)}"></div>
-      <div class="field"><label>Year</label><input type="number" data-path="cars.${i}.year" data-num="1" value="${esc(String(car.year||''))}"></div>
-      <div class="field"><label>Category</label><select data-path="cars.${i}.category" data-rerender="1">${catOptions(car.category)}</select></div>
-      <div class="field"><label>Price text <span class="lng">EN</span></label><input data-path="cars.${i}.price.en" value="${esc(car.price&&car.price.en)}"></div>
-      <div class="field"><label>Price text <span class="lng">中文</span></label><input data-path="cars.${i}.price.zh" value="${esc(car.price&&car.price.zh)}"></div>
-      <div class="field"><label>Photo alt text</label><input data-path="cars.${i}.alt" value="${esc(car.alt||'')}"></div>
+      <div class="field"><label>${L('Name','名称')} <span class="lng">EN</span></label><input data-path="cars.${i}.name.en" data-live="1" value="${esc(car.name.en)}"></div>
+      <div class="field"><label>${L('Name','名称')} <span class="lng">中文</span></label><input data-path="cars.${i}.name.zh" value="${esc(car.name.zh)}"></div>
+      <div class="field"><label>${L('Year','年份')}</label><input type="number" data-path="cars.${i}.year" data-num="1" value="${esc(String(car.year||''))}"></div>
+      <div class="field"><label>${L('Category','分类')}</label><select data-path="cars.${i}.category" data-rerender="1">${catOptions(car.category)}</select></div>
+      <div class="field"><label>${L('Price text','价格文字')} <span class="lng">EN</span></label><input data-path="cars.${i}.price.en" value="${esc(car.price&&car.price.en)}"></div>
+      <div class="field"><label>${L('Price text','价格文字')} <span class="lng">中文</span></label><input data-path="cars.${i}.price.zh" value="${esc(car.price&&car.price.zh)}"></div>
+      <div class="field"><label>${L('Photo alt text','图片替代文字')}</label><input data-path="cars.${i}.alt" value="${esc(car.alt||'')}"></div>
       <div class="field"><label>&nbsp;</label><label style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--text);padding:.5rem 0">
-        <input type="checkbox" data-path="cars.${i}.featured" data-rerender="1" style="width:auto" ${car.featured?'checked':''}> Show in homepage slider ★</label></div>
+        <input type="checkbox" data-path="cars.${i}.featured" data-rerender="1" style="width:auto" ${car.featured?'checked':''}> ${L('Show in homepage slider ★','在首页轮播中显示 ★')}</label></div>
     </div>
     <div style="margin-top:.4rem">${tags}
-      <button class="btn btn-ghost btn-sm" data-act="addtag" data-i="${i}" ${ (car.tags||[]).length>=3?'disabled':''}>+ Add tag</button>
+      <button class="btn btn-ghost btn-sm" data-act="addtag" data-i="${i}" ${ (car.tags||[]).length>=3?'disabled':''}>${L('+ Add tag','＋ 添加标签')}</button>
     </div>
-    <div style="margin-top:.8rem;display:flex;justify-content:flex-end"><button class="btn btn-gold btn-sm" data-act="closeedit">Done</button></div>
+    <div style="margin-top:.8rem;display:flex;justify-content:flex-end"><button class="btn btn-gold btn-sm" data-act="closeedit">${L('Done','完成')}</button></div>
   </div>`;
 }
 
@@ -427,7 +454,7 @@ carList.addEventListener('click',e=>{
   const i=+b.dataset.i, act=b.dataset.act;
   if(act==='edit'){ openCar = (openCar===i?null:i); renderCars(); }
   else if(act==='closeedit'){ openCar=null; renderCars(); }
-  else if(act==='del'){ if(confirm('Delete "'+(DATA.cars[i].name.en||'this car')+'"?')){ DATA.cars.splice(i,1); if(openCar===i)openCar=null; markDirty(); renderCars(); } }
+  else if(act==='del'){ if(confirm(t('Delete "','删除「')+(DATA.cars[i].name.en||'this car')+t('"?','」？'))){ DATA.cars.splice(i,1); if(openCar===i)openCar=null; markDirty(); renderCars(); } }
   else if(act==='up'  && i>0){ [DATA.cars[i-1],DATA.cars[i]]=[DATA.cars[i],DATA.cars[i-1]]; if(openCar===i)openCar=i-1; else if(openCar===i-1)openCar=i; markDirty(); renderCars(); }
   else if(act==='down'&& i<DATA.cars.length-1){ [DATA.cars[i+1],DATA.cars[i]]=[DATA.cars[i],DATA.cars[i+1]]; if(openCar===i)openCar=i+1; else if(openCar===i+1)openCar=i; markDirty(); renderCars(); }
   else if(act==='addtag'){ DATA.cars[i].tags=DATA.cars[i].tags||[]; if(DATA.cars[i].tags.length<3){DATA.cars[i].tags.push({en:'',zh:''}); markDirty(); renderCars();} }
@@ -457,7 +484,7 @@ async function handleImg(input,i){
     const p=document.getElementById('prev-'+i); if(p){p.src=durl;p.style.opacity=1;}
     const pathInput=document.querySelector(`input[data-path="cars.${i}.image"]`); if(pathInput) pathInput.value='(embedded photo)';
     const thumb=document.querySelector(`[data-carblock="${i}"] .thumb`); if(thumb){thumb.src=durl;thumb.style.opacity=1;}
-  }catch(err){ alert('Could not read that image.'); }
+  }catch(err){ alert(t('Could not read that image.','无法读取该图片。')); }
 }
 
 /* ============ HOMEPAGE TEXT ============ */
@@ -475,21 +502,29 @@ function renderText(){
   const c=DATA.content||{};
   const sec=(id,title,rows)=>`<div class="section-card"><h2>${title}</h2><div class="grid2">${rows}</div></div>`;
   let html='';
-  html+=`<p class="smallnote" style="margin:.2rem 0 1rem">Tip: in the big titles you can press Enter to add a line break. The “accent” word shows in gold.</p>`;
-  html+=sec('hero','Hero (top of page)',
-      txt('content.hero.eyebrow','Eyebrow')
-    + txt('content.hero.title','Title',true)
-    + txt('content.hero.accent','Title gold word')
-    + txt('content.hero.lead','Subtitle',true)
-    + txt('content.hero.tags.0','Tag 1')
-    + txt('content.hero.tags.1','Tag 2')
-    + txt('content.hero.tags.2','Tag 3'));
-  const simple=[['inventory','“Explore our collection” section'],['services','Services section'],['why','“Why choose us” section'],['brands','Brands section'],['faq','FAQ section'],['cta','Bottom call-to-action'],['contact','Contact section']];
-  simple.forEach(([k,t])=>{
-    let rows=txt(`content.${k}.eyebrow`,'Eyebrow')+txt(`content.${k}.title`,'Title',k==='why');
-    if(k==='why') rows+=txt('content.why.accent','Title gold word');
-    if(c[k]&&c[k].intro!==undefined) rows+=txt(`content.${k}.intro`,'Intro text',true);
-    html+=sec(k,t,rows);
+  html+=`<p class="smallnote" style="margin:.2rem 0 1rem">${L('Tip: in the big titles you can press Enter to add a line break. The “accent” word shows in gold.','提示：大标题中可按回车换行。「强调」词以金色显示。')}</p>`;
+  html+=sec('hero',L('Hero (top of page)','顶部主视觉'),
+      txt('content.hero.eyebrow',L('Eyebrow','眉标'))
+    + txt('content.hero.title',L('Title','标题'),true)
+    + txt('content.hero.accent',L('Title gold word','标题金色词'))
+    + txt('content.hero.lead',L('Subtitle','副标题'),true)
+    + txt('content.hero.tags.0',L('Tag 1','标签 1'))
+    + txt('content.hero.tags.1',L('Tag 2','标签 2'))
+    + txt('content.hero.tags.2',L('Tag 3','标签 3')));
+  const simple=[
+    ['inventory',L('“Explore our collection” section','「探索我们的车源」板块')],
+    ['services',L('Services section','服务板块')],
+    ['why',L('“Why choose us” section','「为何选择我们」板块')],
+    ['brands',L('Brands section','品牌板块')],
+    ['faq',L('FAQ section','常见问题板块')],
+    ['cta',L('Bottom call-to-action','底部行动号召')],
+    ['contact',L('Contact section','联系板块')]
+  ];
+  simple.forEach(([k,title])=>{
+    let rows=txt(`content.${k}.eyebrow`,L('Eyebrow','眉标'))+txt(`content.${k}.title`,L('Title','标题'),k==='why');
+    if(k==='why') rows+=txt('content.why.accent',L('Title gold word','标题金色词'));
+    if(c[k]&&c[k].intro!==undefined) rows+=txt(`content.${k}.intro`,L('Intro text','介绍文字'),true);
+    html+=sec(k,title,rows);
   });
   document.getElementById('textForm').innerHTML=html;
 }
@@ -499,18 +534,18 @@ const catList=document.getElementById('catList');
 function renderCats(){
   catList.innerHTML=DATA.categories.map((c,i)=>`
     <div class="grid2" data-catrow="${i}" style="align-items:end;margin-bottom:.5rem">
-      <div class="field"><label>id ${c.id==='all'?'<span class="lng">locked</span>':''}</label><input data-path="categories.${i}.id" value="${esc(c.id)}" ${c.id==='all'?'disabled':''}></div>
+      <div class="field"><label>id ${c.id==='all'?'<span class="lng">'+t('locked','锁定')+'</span>':''}</label><input data-path="categories.${i}.id" value="${esc(c.id)}" ${c.id==='all'?'disabled':''}></div>
       <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:.6rem;align-items:end">
-        <div class="field"><label>Label EN</label><input data-path="categories.${i}.label.en" value="${esc(c.label.en)}"></div>
-        <div class="field"><label>Label 中文</label><input data-path="categories.${i}.label.zh" value="${esc(c.label.zh)}"></div>
-        <button class="iconbtn del" title="Remove" data-act="delcat" data-i="${i}" ${c.id==='all'?'disabled style="opacity:.3"':''}>🗑</button>
+        <div class="field"><label>${L('Label','名称')} EN</label><input data-path="categories.${i}.label.en" value="${esc(c.label.en)}"></div>
+        <div class="field"><label>${L('Label','名称')} 中文</label><input data-path="categories.${i}.label.zh" value="${esc(c.label.zh)}"></div>
+        <button class="iconbtn del" title="${t('Remove','删除')}" data-act="delcat" data-i="${i}" ${c.id==='all'?'disabled style="opacity:.3"':''}>🗑</button>
       </div>
     </div>`).join('');
 }
 catList.addEventListener('click',e=>{
   const b=e.target.closest('[data-act="delcat"]'); if(!b) return;
   const i=+b.dataset.i; if(DATA.categories[i].id==='all') return;
-  if(confirm('Remove this category? Cars using it will stay but won\'t match a filter.')){ DATA.categories.splice(i,1); markDirty(); renderCats(); }
+  if(confirm(t("Remove this category? Cars using it will stay but won't match a filter.","删除该分类？使用它的车辆会保留，但将不匹配任何筛选。"))){ DATA.categories.splice(i,1); markDirty(); renderCats(); }
 });
 document.getElementById('addCat').addEventListener('click',()=>{
   DATA.categories.push({id:'new-'+(DATA.categories.length),label:{en:'New',zh:'新'}}); markDirty(); renderCats();
@@ -519,11 +554,11 @@ document.getElementById('addCat').addEventListener('click',()=>{
 /* ============ PUBLISH ============ */
 function applyPreview(){
   try{ localStorage.setItem('cce-admin-data',JSON.stringify(DATA)); setStatus('draft');
-       toast('Preview saved — open the site in this browser to see it.'); }
-  catch(e){ alert('Could not save preview (storage full?). Try downloading data.js instead.'); }
+       toast(t('Preview saved — open the site in this browser to see it.','预览已保存 —— 在本浏览器打开网站即可查看。')); }
+  catch(e){ alert(t('Could not save preview (storage full?). Try downloading data.js instead.','无法保存预览（存储已满？）。请改用下载 data.js。')); }
 }
 function discardDraft(){
-  if(!confirm('Discard your local draft and reload the published content?')) return;
+  if(!confirm(t('Discard your local draft and reload the published content?','放弃本地草稿并重新加载线上内容？'))) return;
   try{localStorage.removeItem('cce-admin-data');}catch(e){}
   location.reload();
 }
@@ -562,7 +597,7 @@ async function downloadDataJs(){
   const blob=new Blob([text],{type:'text/javascript'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='data.js';
   document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(a.href);
-  toast('data.js downloaded — commit it to your repo to go live.');
+  toast(t('data.js downloaded — commit it to your repo to go live.','已下载 data.js —— 提交到仓库即可发布。'));
 }
 
 function b64utf8(str){const bytes=new TextEncoder().encode(str);let bin='';const CH=0x8000;for(let i=0;i<bytes.length;i+=CH){bin+=String.fromCharCode.apply(null,bytes.subarray(i,i+CH));}return btoa(bin);}
@@ -573,34 +608,34 @@ async function commitGitHub(){
   const branch=document.getElementById('ghBranch').value.trim()||'main';
   const path=document.getElementById('ghPath').value.trim()||'data.js';
   const token=document.getElementById('ghToken').value.trim();
-  if(!owner||!repo||!token){ alert('Fill owner, repository and token first.'); return; }
+  if(!owner||!repo||!token){ alert(t('Fill owner, repository and token first.','请先填写用户名、仓库和令牌。')); return; }
   if(document.getElementById('ghRemember').checked){ try{localStorage.setItem('cce-gh-token',token);localStorage.setItem('cce-gh-cfg',JSON.stringify({owner,repo,branch,path}));}catch(e){} }
   const api=`https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}`;
   const H={Authorization:'Bearer '+token,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'};
   document.getElementById('ghLog').textContent='';
   try{
-    ghLog('Reading current '+path+' …');
+    ghLog(t('Reading current ','正在读取 ')+path+' …');
     let sha=null;
     const g=await fetch(`${api}?ref=${encodeURIComponent(branch)}`,{headers:H});
-    if(g.status===200){ sha=(await g.json()).sha; ghLog('Found existing file.'); }
-    else if(g.status===404){ ghLog('No existing file — will create it.'); }
-    else if(g.status===401){ ghLog('Token rejected (401). Check the token.','warn'); return; }
-    else { ghLog('Unexpected status '+g.status+' reading file.','warn'); }
-    ghLog('Committing …');
+    if(g.status===200){ sha=(await g.json()).sha; ghLog(t('Found existing file.','已找到现有文件。')); }
+    else if(g.status===404){ ghLog(t('No existing file — will create it.','文件不存在 —— 将新建。')); }
+    else if(g.status===401){ ghLog(t('Token rejected (401). Check the token.','令牌被拒绝（401）。请检查令牌。'),'warn'); return; }
+    else { ghLog(t('Unexpected status ','异常状态 ')+g.status,'warn'); }
+    ghLog(t('Committing …','正在提交 …'));
     const body={message:'Update site content via admin panel',content:b64utf8(await buildDataJs()),branch};
     if(sha) body.sha=sha;
     const put=await fetch(api,{method:'PUT',headers:{...H,'Content-Type':'application/json'},body:JSON.stringify(body)});
     if(put.status===200||put.status===201){
       const j=await put.json();
-      ghLog('✓ Published. Commit: '+(j.commit&&j.commit.sha||'').slice(0,7));
-      ghLog('GitHub Pages will rebuild in ~1 minute.');
+      ghLog(t('✓ Published. Commit: ','✓ 已发布。提交：')+(j.commit&&j.commit.sha||'').slice(0,7));
+      ghLog(t('GitHub Pages will rebuild in ~1 minute.','GitHub Pages 约 1 分钟后重新发布。'));
       setStatus('published');
     }else{
       const j=await put.json().catch(()=>({}));
-      ghLog('Failed ('+put.status+'): '+(j.message||'unknown error'),'warn');
-      if(put.status===403) ghLog('Token likely missing "Contents: Read & write" for this repo.','warn');
+      ghLog(t('Failed ','失败 ')+'('+put.status+'): '+(j.message||'unknown error'),'warn');
+      if(put.status===403) ghLog(t('Token likely missing "Contents: Read & write" for this repo.','令牌可能缺少本仓库的「Contents：读写」权限。'),'warn');
     }
-  }catch(err){ ghLog('Network error: '+err.message,'warn'); }
+  }catch(err){ ghLog(t('Network error: ','网络错误：')+err.message,'warn'); }
 }
 
 /* ============ misc ============ */
@@ -613,7 +648,8 @@ document.getElementById('dlBtn').addEventListener('click',downloadDataJs);
 document.getElementById('dlBtn2').addEventListener('click',downloadDataJs);
 document.getElementById('commitBtn').addEventListener('click',commitGitHub);
 document.getElementById('resetDraft').addEventListener('click',discardDraft);
-document.getElementById('forgetToken').addEventListener('click',()=>{try{localStorage.removeItem('cce-gh-token');}catch(e){}document.getElementById('ghToken').value='';toast('Token forgotten on this device.');});
+document.getElementById('forgetToken').addEventListener('click',()=>{try{localStorage.removeItem('cce-gh-token');}catch(e){}document.getElementById('ghToken').value='';toast(t('Token forgotten on this device.','已在本设备清除令牌。'));});
+document.getElementById('langTog').addEventListener('click',e=>{const b=e.target.closest('button'); if(b) setLang(b.dataset.l);});
 
 /* prefill github form + remembered token */
 (function(){
@@ -648,7 +684,7 @@ function showGate(){
   async function attempt(){
     const h=await sha256hex(pass.value);
     if(h && h===DATA.config.admin.hash){ sessionStorage.setItem('cce-admin-unlocked','1'); g.classList.add('hidden'); }
-    else { document.getElementById('gateErr').textContent='Wrong password.'; pass.select(); }
+    else { document.getElementById('gateErr').textContent=t('Wrong password.','密码错误。'); pass.select(); }
   }
   document.getElementById('gateBtn').addEventListener('click',attempt);
   pass.addEventListener('keydown',e=>{ if(e.key==='Enter') attempt(); });
@@ -661,21 +697,21 @@ function wireSecurity(){
   tog.addEventListener('change',()=>{
     DATA.config.admin=DATA.config.admin||{};
     DATA.config.admin.gate=tog.checked;
-    if(tog.checked && !DATA.config.admin.hash){ tog.checked=false; DATA.config.admin.gate=false; secMsg('Set a password first.',true); return; }
-    markDirty(); secMsg(tog.checked?'Password will be required after you Publish.':'Password turned off — Publish to apply.');
+    if(tog.checked && !DATA.config.admin.hash){ tog.checked=false; DATA.config.admin.gate=false; secMsg(t('Set a password first.','请先设置密码。'),true); return; }
+    markDirty(); secMsg(tog.checked?t('Password will be required after you Publish.','发布后将需要输入密码。'):t('Password turned off — Publish to apply.','已关闭密码 —— 发布后生效。'));
   });
   document.getElementById('setPass').addEventListener('click',async()=>{
     const v=document.getElementById('newPass').value;
-    if(v.length<4){ secMsg('Use at least 4 characters.',true); return; }
+    if(v.length<4){ secMsg(t('Use at least 4 characters.','至少 4 个字符。'),true); return; }
     const h=await sha256hex(v);
-    if(!h){ secMsg('Password hashing needs https — set it on your live site, not a local file.',true); return; }
+    if(!h){ secMsg(t('Password hashing needs https — set it on your live site, not a local file.','密码加密需要 https —— 请在线上网站设置，而非本地文件。'),true); return; }
     DATA.config.admin=DATA.config.admin||{}; DATA.config.admin.hash=h; DATA.config.admin.gate=true;
     document.getElementById('gateToggle').checked=true;
     document.getElementById('newPass').value='';
-    markDirty(); secMsg('Password set. Click Publish to make it live for everyone. (You stay logged in here.)');
+    markDirty(); secMsg(t('Password set. Click Publish to make it live for everyone. (You stay logged in here.)','密码已设置。点击「发布」即可对所有人生效。（本设备保持登录。）'));
   });
 }
-function secMsg(t,warn){ const m=document.getElementById('secMsg'); m.innerHTML=t; m.style.color=warn?'var(--danger)':'var(--text-soft)'; }
+function secMsg(html,warn){ const m=document.getElementById('secMsg'); m.innerHTML=html; m.style.color=warn?'var(--danger)':'var(--text-soft)'; }
 
 /* boot */
 function hydrateStatic(scope){
@@ -684,6 +720,7 @@ function hydrateStatic(scope){
     if(el.type==='checkbox') el.checked=!!v; else el.value=(v==null?'':v);
   });
 }
+applyLangChrome();
 if(DATA){
   if(gateRequired()) showGate();
   hydrateStatic(document.getElementById('panel-contact'));
