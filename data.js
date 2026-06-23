@@ -211,7 +211,7 @@ window.SITE_DATA = {
       "featured": false,
       "category": "suv",
       "name": {
-        "en": "New car",
+        "en": "Caaarrrr",
         "zh": "新车"
       },
       "year": 2026,
