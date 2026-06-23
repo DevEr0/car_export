@@ -30,7 +30,7 @@ window.SITE_DATA = {
     },
     "admin": {
       "gate": true,
-      "hash": "aab6b9aae768e33156a21acd791e8f2bf402ba44c00b0f6b572ea72225aa006a"
+      "hash": "eb3b48fa945f163eb415c3011572308f2c5ae890f7f9d0665152b068b7f90bca"
     }
   },
   "content": {
